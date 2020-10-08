@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\modules\Buddy.Authorization.Shared\Buddy.Authorization.Shared.csproj" />
+      <ProjectReference Include="..\..\modules\Buddy.Localization.Shared\Buddy.Localization.Shared.csproj" />
+      <ProjectReference Include="..\..\modules\Buddy.Logging.Shared\Buddy.Logging.Shared.csproj" />
+      <ProjectReference Include="..\..\modules\Buddy.Settings.Shared\Buddy.Settings.Shared.csproj" />
+    </ItemGroup>
+
+</Project>

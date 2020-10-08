@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\modules\Buddy.Authorization\Buddy.Authorization.csproj" />
+      <ProjectReference Include="..\..\modules\Buddy.Localization\Buddy.Localization.csproj" />
+      <ProjectReference Include="..\..\modules\Buddy.Logging\Buddy.Logging.csproj" />
+      <ProjectReference Include="..\..\modules\Buddy.Settings\Buddy.Settings.csproj" />
+    </ItemGroup>
+
+</Project>
