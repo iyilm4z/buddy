@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<RootNamespace>Buddy</RootNamespace>
+		<AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\host\Buddy.EntityFrameworkCore\Buddy.EntityFrameworkCore.csproj" />
+		<ProjectReference Include="..\Buddy.Localization.Shared\Buddy.Localization.Shared.csproj" />
+	</ItemGroup>
+
+</Project>

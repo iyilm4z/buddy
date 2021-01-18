@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<RootNamespace>Buddy</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
+	</ItemGroup>
+
+</Project>
