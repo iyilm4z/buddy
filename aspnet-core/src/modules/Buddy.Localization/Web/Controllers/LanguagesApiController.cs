@@ -3,12 +3,12 @@
 namespace Buddy.Web.Controllers
 {
     [ApiController]
-    [Route("api/v1/languages")]
-    public class LanguageApiController : ControllerBase
+    [Route("api/languages")]
+    public class LanguagesApiController : ControllerBase
     {
         public string Index()
         {
-            return "Ping Language Api!";
+            return "Ping from Language Api!";
         }
     }
 }
