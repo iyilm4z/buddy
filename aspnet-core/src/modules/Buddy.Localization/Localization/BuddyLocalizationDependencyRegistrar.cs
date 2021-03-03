@@ -10,6 +10,6 @@ namespace Buddy.Localization
             throw new System.NotImplementedException();
         }
 
-        public int Order { get; }
+        public int Order => 30;
     }
 }

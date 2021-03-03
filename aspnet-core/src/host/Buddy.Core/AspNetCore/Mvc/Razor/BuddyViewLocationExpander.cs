@@ -1,8 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc.Razor;
 
-namespace Buddy.Web.Mvc.Razor
+[assembly: AspMvcViewLocationFormat("/Web/Views/{1}/{0}.cshtml")]
+[assembly: AspMvcViewLocationFormat("/Web/Views/Shared/{0}.cshtml")]
+
+namespace Buddy.AspNetCore.Mvc.Razor
 {
     public class BuddyViewLocationExpander : IViewLocationExpander
     {

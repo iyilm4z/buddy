@@ -3,7 +3,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:56157/"
+      "applicationUrl": "http://localhost:58230/",
+      "sslPort": 44340
     }
   },
   "profiles": {
@@ -14,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Buddy.Web.Core": {
+    "Buddy.Core": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

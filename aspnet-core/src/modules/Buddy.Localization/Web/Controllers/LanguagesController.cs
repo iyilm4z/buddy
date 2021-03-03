@@ -1,12 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Buddy.Web.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Buddy.Web.Controllers
 {
     public class LanguagesController : Controller
     {
-        public string Index()
+        public IActionResult Index()
         {
-            return "Ping from Language Controller!";
+            var model = new LanguageListModel
+            {
+                Name = "Turkish"
+            };
+
+            return View(model);
         }
     }
 }

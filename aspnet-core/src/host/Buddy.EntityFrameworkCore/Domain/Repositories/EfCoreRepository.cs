@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Buddy.Domain.Entities;
-using Buddy.Domain.Repositories;
 
-namespace Buddy.EntityFrameworkCore.Repositories
+namespace Buddy.Domain.Repositories
 {
     public class EfCoreRepository<TEntity> : IRepository<TEntity> where TEntity : Entity
     {

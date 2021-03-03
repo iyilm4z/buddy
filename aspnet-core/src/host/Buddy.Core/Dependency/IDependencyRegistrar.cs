@@ -6,6 +6,6 @@ namespace Buddy.Dependency
     {
         void Register(ContainerBuilder builder);
 
-        int Order { get; }
+        public int Order { get; }
     }
 }
