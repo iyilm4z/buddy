@@ -1,7 +1,6 @@
 using System.IO;
 using System.Linq;
 using Buddy.AspNetCore.Mvc.Razor;
-using Buddy.Localization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Razor;

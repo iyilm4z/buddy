@@ -1,4 +1,5 @@
-﻿using Buddy.Web.Models;
+﻿using System.Collections.Generic;
+using Buddy.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Buddy.Web.Controllers
@@ -7,9 +8,23 @@ namespace Buddy.Web.Controllers
     {
         public IActionResult Index()
         {
-            var model = new LanguageListModel
+            var model = new List<LanguageListModel>
             {
-                Name = "Turkish"
+                new LanguageListModel
+                {
+                    Id = 1,
+                    Name = "Turkish"
+                },
+                new LanguageListModel
+                {
+                    Id = 2,
+                    Name = "English"
+                },
+                new LanguageListModel
+                {
+                    Id = 3,
+                    Name = "Russian"
+                }
             };
 
             return View(model);
