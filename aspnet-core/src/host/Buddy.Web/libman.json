@@ -4,7 +4,7 @@
   "libraries": [
     {
       "library": "jquery@3.4.1",
-      "destination": "wwwroot/lib/jquery",
+      "destination": "wwwroot/libs/jquery",
       "files": [
         "jquery.min.js"
       ]
@@ -12,7 +12,7 @@
     {
       "library": "bootstrap@4.4.1",
       "provider": "jsdelivr",
-      "destination": "wwwroot/lib/bootstrap",
+      "destination": "wwwroot/libs/bootstrap",
       "files": [
         "dist/js/bootstrap.bundle.min.js"
       ]
@@ -20,7 +20,7 @@
     {
       "library": "@fortawesome/fontawesome-free@5.13.0",
       "provider": "jsdelivr",
-      "destination": "wwwroot/lib/font-awesome",
+      "destination": "wwwroot/libs/font-awesome",
       "files": [
         "css/all.min.css",
         "webfonts/fa-brands-400.eot",
@@ -43,7 +43,7 @@
     {
       "library": "admin-lte@3.0.5",
       "provider": "jsdelivr",
-      "destination": "wwwroot/lib/admin-lte",
+      "destination": "wwwroot/libs/admin-lte",
       "files": [
         "dist/js/adminlte.min.js",
         "dist/css/adminlte.min.css",
