@@ -1,11 +1,13 @@
 ﻿using Autofac;
+using Buddy.Configuration;
+using Buddy.Reflection;
 
 namespace Buddy.Dependency
 {
     public interface IDependencyRegistrar
     {
-        void Register(ContainerBuilder builder);
+        void Register(ContainerBuilder builder, ITypeFinder typeFinder, BuddyConfig config);
 
-        public int Order { get; }
+        int Order { get; }
     }
 }

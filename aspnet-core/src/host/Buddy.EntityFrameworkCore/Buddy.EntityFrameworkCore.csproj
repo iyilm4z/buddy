@@ -10,7 +10,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\modules\Buddy.Localization.Shared\Buddy.Localization.Shared.csproj" />
+	  <ProjectReference Include="..\..\modules\Buddy.Configuration.Shared\Buddy.Configuration.Shared.csproj" />
+	  <ProjectReference Include="..\..\modules\Buddy.Localization.Shared\Buddy.Localization.Shared.csproj" />
+	  <ProjectReference Include="..\..\modules\Buddy.Logging.Shared\Buddy.Logging.Shared.csproj" />
+	  <ProjectReference Include="..\..\modules\Buddy.MultiTenancy.Shared\Buddy.MultiTenancy.Shared.csproj" />
+	  <ProjectReference Include="..\..\modules\Buddy.Users.Shared\Buddy.Users.Shared.csproj" />
 	</ItemGroup>
 
 </Project>

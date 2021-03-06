@@ -1,6 +1,6 @@
 using System.IO;
 using System.Linq;
-using Buddy.AspNetCore.Mvc.Razor;
+using Buddy.Mvc.Razor;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Razor;
@@ -31,7 +31,8 @@ namespace Buddy.Web
 
             services.Configure<MvcRazorRuntimeCompilationOptions>(options =>
             {
-                var moduleFolderPath = Path.GetFullPath(Path.Combine(HostEnvironment.ContentRootPath, "..", "..", "modules"));
+                var moduleFolderPath =
+                    Path.GetFullPath(Path.Combine(HostEnvironment.ContentRootPath, "..", "..", "modules"));
                 var modulePaths = Directory.GetDirectories(moduleFolderPath)
                     .Where(dir => !dir.EndsWith(".Shared"))
                     .ToList();
@@ -65,10 +66,7 @@ namespace Buddy.Web
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapDefaultControllerRoute();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapDefaultControllerRoute(); });
         }
     }
 }

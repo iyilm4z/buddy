@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace AdminLte.Mvc.Views.Shared.Components.HeaderMessagesMenu
+namespace Buddy.Web.Views.Shared.Components.HeaderMessagesMenu
 {
     public class HeaderMessagesMenuViewComponent : ViewComponent
     {
-        public IViewComponentResult Invoke() => View();
+        public IViewComponentResult Invoke()
+        {
+            return View();
+        }
     }
 }

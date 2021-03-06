@@ -1,6 +1,5 @@
-﻿@using AdminLte.Mvc.Views.Shared.Components.HeaderMessagesMenu
-@using AdminLte.Mvc.Views.Shared.Components.HeaderNotificationsMenu
-
+﻿@using Buddy.Web.Views.Shared.Components.HeaderMessagesMenu
+@using Buddy.Web.Views.Shared.Components.HeaderNotificationsMenu
 <ul class="navbar-nav ml-auto">
     @(await Component.InvokeAsync<HeaderMessagesMenuViewComponent>())
     @(await Component.InvokeAsync<HeaderNotificationsMenuViewComponent>())

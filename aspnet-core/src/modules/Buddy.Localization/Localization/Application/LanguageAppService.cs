@@ -1,23 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using Buddy.Application;
 using Buddy.Localization.Application.Dto;
 
 namespace Buddy.Localization.Application
 {
-    public class LanguageAppService : ILanguageAppService
+    public class LanguageAppService : ApplicationService, ILanguageAppService
     {
-        public List<LanguageDto> GelAll()
+        public LanguageDto Get()
         {
-            throw new System.NotImplementedException();
-        }
-
-        public void CreateOrEdit(LanguageEditDto dto)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Delete(int dto)
-        {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

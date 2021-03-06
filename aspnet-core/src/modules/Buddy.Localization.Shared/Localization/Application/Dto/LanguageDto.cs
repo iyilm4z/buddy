@@ -1,6 +1,8 @@
-﻿namespace Buddy.Localization.Application.Dto
+﻿using Buddy.Application.Dto;
+
+namespace Buddy.Localization.Application.Dto
 {
-    public class LanguageDto
+    public class LanguageDto : EntityDto
     {
     }
 }

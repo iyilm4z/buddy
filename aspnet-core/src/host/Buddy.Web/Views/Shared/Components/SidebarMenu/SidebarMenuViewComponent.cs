@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace AdminLte.Mvc.Views.Shared.Components.SidebarMenu
+namespace Buddy.Web.Views.Shared.Components.SidebarMenu
 {
     public class SidebarMenuViewComponent : ViewComponent
     {
-        public IViewComponentResult Invoke() => View();
+        public IViewComponentResult Invoke()
+        {
+            return View();
+        }
     }
 }

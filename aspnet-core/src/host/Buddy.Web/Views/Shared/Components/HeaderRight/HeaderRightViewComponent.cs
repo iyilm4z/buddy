@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace AdminLte.Mvc.Views.Shared.Components.HeaderRight
+namespace Buddy.Web.Views.Shared.Components.HeaderRight
 {
     public class HeaderRightViewComponent : ViewComponent
     {
-        public IViewComponentResult Invoke() => View();
+        public IViewComponentResult Invoke()
+        {
+            return View();
+        }
     }
 }

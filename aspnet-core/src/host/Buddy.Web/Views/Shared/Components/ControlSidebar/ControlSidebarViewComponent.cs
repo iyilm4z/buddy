@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace AdminLte.Mvc.Views.Shared.Components.ControlSidebar
+namespace Buddy.Web.Views.Shared.Components.ControlSidebar
 {
     public class ControlSidebarViewComponent : ViewComponent
     {
-        public IViewComponentResult Invoke() => View();
+        public IViewComponentResult Invoke()
+        {
+            return View();
+        }
     }
 }

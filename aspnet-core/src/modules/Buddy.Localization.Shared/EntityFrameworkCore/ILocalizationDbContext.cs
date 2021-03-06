@@ -7,6 +7,8 @@ namespace Buddy.EntityFrameworkCore
     {
         DbSet<Language> Languages { get; set; }
 
-        DbSet<LanguageText> LanguageTexts { get; set; }
+        DbSet<LocaleStringResource> LocaleStringResources { get; set; }
+
+        DbSet<LocalizedProperty> LocalizedProperties { get; set; }
     }
 }

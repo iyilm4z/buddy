@@ -7,6 +7,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\modules\Buddy.Localization\Buddy.Localization.csproj" />
+	  <ProjectReference Include="..\..\modules\Buddy.Logging\Buddy.Logging.csproj" />
 	</ItemGroup>
 
 </Project>
