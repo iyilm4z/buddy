@@ -29,8 +29,7 @@ namespace Buddy.Reflection
             return FindClassesOfType(typeof(T), assemblies, onlyConcreteClasses);
         }
 
-        public IEnumerable<Type> FindClassesOfType(Type assignTypeFrom, IEnumerable<Assembly> assemblies,
-            bool onlyConcreteClasses = true)
+        public IEnumerable<Type> FindClassesOfType(Type assignTypeFrom, IEnumerable<Assembly> assemblies, bool onlyConcreteClasses = true)
         {
             var result = new List<Type>();
 
@@ -56,24 +55,28 @@ namespace Buddy.Reflection
 
                     foreach (var type in types)
                     {
-                        if (assignTypeFrom.IsAssignableFrom(type) ||
-                            assignTypeFrom.IsGenericTypeDefinition &&
-                            DoesTypeImplementOpenGeneric(type, assignTypeFrom))
+                        if (!assignTypeFrom.IsAssignableFrom(type)
+                            && (!assignTypeFrom.IsGenericTypeDefinition
+                                || !DoesTypeImplementOpenGeneric(type, assignTypeFrom)))
                         {
-                            if (!type.IsInterface)
+                            continue;
+                        }
+
+                        if (type.IsInterface)
+                        {
+                            continue;
+                        }
+
+                        if (onlyConcreteClasses)
+                        {
+                            if (type.IsClass && !type.IsAbstract)
                             {
-                                if (onlyConcreteClasses)
-                                {
-                                    if (type.IsClass && !type.IsAbstract)
-                                    {
-                                        result.Add(type);
-                                    }
-                                }
-                                else
-                                {
-                                    result.Add(type);
-                                }
+                                result.Add(type);
                             }
+                        }
+                        else
+                        {
+                            result.Add(type);
                         }
                     }
                 }

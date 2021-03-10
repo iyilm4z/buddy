@@ -1,6 +1,5 @@
 ﻿using Buddy.Configuration.Domain.Entities;
 using Buddy.Localization.Domain.Entities;
-using Buddy.Logging.Domain;
 using Buddy.Logging.Domain.Entities;
 using Buddy.MultiTenancy.Domain.Entities;
 using Buddy.Users.Domain.Entities;
@@ -15,7 +14,16 @@ namespace Buddy.EntityFrameworkCore
         IMultiTenancyDbContext,
         IUsersDbContext
     {
-        public DbSet<TenantMapping> TenantMappings { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ConfigureConfiguration<BuddyDbContext>();
+            modelBuilder.ConfigureLocalization<BuddyDbContext>();
+            modelBuilder.ConfigureLogging<BuddyDbContext, User>();
+            modelBuilder.ConfigureMultiTenancy<BuddyDbContext>();
+            modelBuilder.ConfigureUsers<BuddyDbContext>();
+        }
 
         // Configuration
         public DbSet<Setting> Settings { get; set; }
@@ -32,6 +40,7 @@ namespace Buddy.EntityFrameworkCore
 
         // MultiTenancy
         public DbSet<Tenant> Tenants { get; set; }
+        public DbSet<TenantMapping> TenantMappings { get; set; }
 
         // Users
         public DbSet<User> Users { get; set; }
@@ -40,16 +49,5 @@ namespace Buddy.EntityFrameworkCore
         public DbSet<UserPassword> UserPasswords { get; set; }
         public DbSet<PermissionRecord> PermissionRecords { get; set; }
         public DbSet<PermissionRecordUserRoleMapping> PermissionRecordUserRoleMappings { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-
-            modelBuilder.ConfigureConfiguration<BuddyDbContext>();
-            modelBuilder.ConfigureLocalization<BuddyDbContext>();
-            modelBuilder.ConfigureLogging<BuddyDbContext>();
-            modelBuilder.ConfigureMultiTenancy<BuddyDbContext>();
-            modelBuilder.ConfigureUsers<BuddyDbContext>();
-        }
     }
 }

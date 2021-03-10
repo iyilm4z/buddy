@@ -5,7 +5,7 @@ using Buddy.Domain.Entities;
 
 namespace Buddy.Users.Domain.Entities
 {
-    public class User : Entity
+    public class User : Entity, IUser
     {
         private IList<UserRole> _userRoles;
         private ICollection<UserUserRoleMapping> _userUserRoleMappings;

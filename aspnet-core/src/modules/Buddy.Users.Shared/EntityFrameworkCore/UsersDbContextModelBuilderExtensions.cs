@@ -5,13 +5,13 @@ namespace Buddy.EntityFrameworkCore
 {
     public static class UsersDbContextModelBuilderExtensions
     {
-        // ReSharper disable once UnusedMember.Global
+        // ReSharper disable once UnusedTypeParameter
         public static void ConfigureUsers<TDbContext>(this ModelBuilder builder)
             where TDbContext : IUsersDbContext
         {
             builder.Entity<User>(b =>
             {
-                b.ToTable(nameof(User));
+                b.ToTable(IUser.UserTableName);
                 b.HasKey(user => user.Id);
 
                 b.Property(user => user.Username).HasMaxLength(1000);
@@ -33,10 +33,10 @@ namespace Buddy.EntityFrameworkCore
 
             builder.Entity<UserUserRoleMapping>(b =>
             {
-                b.ToTable($"{nameof(User)}_{nameof(UserRole)}_Mapping");
-                b.HasKey(mapping => new {mapping.UserId, mapping.UserRoleId});
+                b.ToTable($"{IUser.UserTableName}_{nameof(UserRole)}_Mapping");
+                b.HasKey(mapping => new { mapping.UserId, mapping.UserRoleId });
 
-                b.Property(mapping => mapping.UserId).HasColumnName($"{nameof(User)}_Id");
+                b.Property(mapping => mapping.UserId).HasColumnName($"{IUser.UserTableName}_Id");
                 b.Property(mapping => mapping.UserRoleId).HasColumnName($"{nameof(UserRole)}_Id");
 
                 b.HasOne(mapping => mapping.User)
@@ -78,7 +78,7 @@ namespace Buddy.EntityFrameworkCore
             builder.Entity<PermissionRecordUserRoleMapping>(b =>
             {
                 b.ToTable($"{nameof(PermissionRecord)}_{nameof(UserRole)}_Mapping");
-                b.HasKey(mapping => new {mapping.PermissionRecordId, mapping.UserRoleId});
+                b.HasKey(mapping => new { mapping.PermissionRecordId, mapping.UserRoleId });
 
                 b.Property(mapping => mapping.PermissionRecordId).HasColumnName($"{nameof(PermissionRecord)}_Id");
                 b.Property(mapping => mapping.UserRoleId).HasColumnName($"{nameof(UserRole)}_Id");

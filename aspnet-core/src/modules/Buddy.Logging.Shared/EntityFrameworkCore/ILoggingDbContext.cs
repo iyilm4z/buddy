@@ -1,5 +1,4 @@
-﻿using Buddy.Logging.Domain;
-using Buddy.Logging.Domain.Entities;
+﻿using Buddy.Logging.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Buddy.EntityFrameworkCore

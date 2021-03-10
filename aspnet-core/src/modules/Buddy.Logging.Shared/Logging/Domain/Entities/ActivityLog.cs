@@ -19,12 +19,9 @@ namespace Buddy.Logging.Domain.Entities
 
         public virtual string IpAddress { get; set; }
 
-        /// <summary>
-        ///     Gets the activity log type
-        /// </summary>
         public virtual ActivityLogType ActivityLogType { get; set; }
 
         //TODO
-        //public virtual User User { get; set; }
+        public virtual LogUser User { get; set; }
     }
 }

@@ -7,9 +7,6 @@ namespace Buddy.Domain.Entities
     {
         public int Id { get; set; }
 
-        public override string ToString()
-        {
-            return $"[{GetType().Name} {Id}]";
-        }
+        public override string ToString() => $"[{GetType().Name} {Id}]";
     }
 }

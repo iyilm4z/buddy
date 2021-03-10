@@ -23,11 +23,11 @@ namespace Buddy.Logging.Domain.Entities
 
         public LogLevel LogLevel
         {
-            get => (LogLevel) LogLevelId;
-            set => LogLevelId = (int) value;
+            get => (LogLevel)LogLevelId;
+            set => LogLevelId = (int)value;
         }
 
         //TODO
-        //public virtual LogUser User { get; set; }
+        public virtual LogUser User { get; set; }
     }
 }
