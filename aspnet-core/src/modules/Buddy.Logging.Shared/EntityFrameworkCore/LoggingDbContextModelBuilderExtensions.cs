@@ -22,16 +22,16 @@ namespace Buddy.EntityFrameworkCore
             builder.Entity<Log>(b =>
             {
                 b.ToTable(nameof(Log));
-                b.HasKey(logItem => logItem.Id);
+                b.HasKey(log => log.Id);
 
-                b.Property(logItem => logItem.ShortMessage).IsRequired();
-                b.Property(logItem => logItem.IpAddress).HasMaxLength(200);
+                b.Property(log => log.ShortMessage).IsRequired();
+                b.Property(log => log.IpAddress).HasMaxLength(200);
 
-                b.Ignore(logItem => logItem.LogLevel);
+                b.Ignore(log => log.LogLevel);
 
-                b.HasOne(logItem => logItem.User)
+                b.HasOne(log => log.User)
                     .WithMany()
-                    .HasForeignKey(logItem => logItem.UserId)
+                    .HasForeignKey(log => log.UserId)
                     .OnDelete(DeleteBehavior.Cascade);
             });
         }
@@ -41,20 +41,20 @@ namespace Buddy.EntityFrameworkCore
             builder.Entity<ActivityLog>(b =>
             {
                 b.ToTable(nameof(ActivityLog));
-                b.HasKey(logItem => logItem.Id);
+                b.HasKey(activityLog => activityLog.Id);
 
-                b.Property(logItem => logItem.Comment).IsRequired();
-                b.Property(logItem => logItem.IpAddress).HasMaxLength(200);
-                b.Property(logItem => logItem.EntityName).HasMaxLength(400);
+                b.Property(activityLog => activityLog.Comment).IsRequired();
+                b.Property(activityLog => activityLog.IpAddress).HasMaxLength(200);
+                b.Property(activityLog => activityLog.EntityName).HasMaxLength(400);
 
-                b.HasOne(logItem => logItem.ActivityLogType)
+                b.HasOne(activityLog => activityLog.ActivityLogType)
                     .WithMany()
-                    .HasForeignKey(logItem => logItem.ActivityLogTypeId)
+                    .HasForeignKey(activityLog => activityLog.ActivityLogTypeId)
                     .IsRequired();
 
-                b.HasOne(logItem => logItem.User)
+                b.HasOne(activityLog => activityLog.User)
                     .WithMany()
-                    .HasForeignKey(logItem => logItem.UserId)
+                    .HasForeignKey(activityLog => activityLog.UserId)
                     .IsRequired();
             });
         }
@@ -64,10 +64,10 @@ namespace Buddy.EntityFrameworkCore
             builder.Entity<ActivityLogType>(b =>
             {
                 b.ToTable(nameof(ActivityLogType));
-                b.HasKey(logType => logType.Id);
+                b.HasKey(activityLogType => activityLogType.Id);
 
-                b.Property(logType => logType.SystemKeyword).HasMaxLength(100).IsRequired();
-                b.Property(logType => logType.Name).HasMaxLength(200).IsRequired();
+                b.Property(activityLogType => activityLogType.SystemKeyword).HasMaxLength(100).IsRequired();
+                b.Property(activityLogType => activityLogType.Name).HasMaxLength(200).IsRequired();
             });
         }
 
@@ -78,6 +78,10 @@ namespace Buddy.EntityFrameworkCore
             builder.Entity<TLogUser>(b =>
             {
                 b.ToTable(IUser.UserTableName);
+
+                b.Property(user => user.Username).HasMaxLength(1000).HasColumnName(nameof(IUser.Username));
+                b.Property(user => user.Email).HasMaxLength(1000).HasColumnName(nameof(IUser.Email));
+
                 b.HasOne<TUser>().WithOne().HasForeignKey<TLogUser>(logUser => logUser.Id);
             });
         }

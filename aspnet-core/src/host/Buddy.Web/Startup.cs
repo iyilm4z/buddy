@@ -1,10 +1,12 @@
 using System.IO;
 using System.Linq;
+using Buddy.EntityFrameworkCore;
 using Buddy.Mvc.Razor;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
@@ -26,6 +28,11 @@ namespace Buddy.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<BuddyDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDatabaseDeveloperPageExceptionFilter();
+
             services.AddControllersWithViews()
                 .AddRazorRuntimeCompilation();
 
@@ -66,7 +73,10 @@ namespace Buddy.Web
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints => { endpoints.MapDefaultControllerRoute(); });
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapDefaultControllerRoute();
+            });
         }
     }
 }

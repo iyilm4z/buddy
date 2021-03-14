@@ -9,6 +9,13 @@ namespace Buddy.EntityFrameworkCore
         public static void ConfigureLocalization<TDbContext>(this ModelBuilder builder)
             where TDbContext : ILocalizationDbContext
         {
+            builder.ConfigureLanguageEntity();
+            builder.ConfigureLocaleStringResourceEntity();
+            builder.ConfigureLocalizedPropertyEntity();
+        }
+
+        private static void ConfigureLanguageEntity(this ModelBuilder builder)
+        {
             builder.Entity<Language>(b =>
             {
                 b.ToTable(nameof(Language));
@@ -19,7 +26,10 @@ namespace Buddy.EntityFrameworkCore
                 b.Property(language => language.UniqueSeoCode).HasMaxLength(2);
                 b.Property(language => language.FlagImageFileName).HasMaxLength(50);
             });
+        }
 
+        private static void ConfigureLocaleStringResourceEntity(this ModelBuilder builder)
+        {
             builder.Entity<LocaleStringResource>(b =>
             {
                 b.ToTable(nameof(LocaleStringResource));
@@ -33,7 +43,10 @@ namespace Buddy.EntityFrameworkCore
                     .HasForeignKey(locale => locale.LanguageId)
                     .IsRequired();
             });
+        }
 
+        private static void ConfigureLocalizedPropertyEntity(this ModelBuilder builder)
+        {
             builder.Entity<LocalizedProperty>(b =>
             {
                 b.ToTable(nameof(LocalizedProperty));

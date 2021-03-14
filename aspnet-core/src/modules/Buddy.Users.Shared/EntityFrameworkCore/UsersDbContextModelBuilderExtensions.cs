@@ -9,19 +9,32 @@ namespace Buddy.EntityFrameworkCore
         public static void ConfigureUsers<TDbContext>(this ModelBuilder builder)
             where TDbContext : IUsersDbContext
         {
+            builder.ConfigureUserEntity();
+            builder.ConfigureUserRoleEntity();
+            builder.ConfigureUserUserRoleMappingEntity();
+            builder.ConfigureUserPasswordEntity();
+            builder.ConfigurePermissionRecordEntity();
+            builder.ConfigurePermissionRecordUserRoleMappingEntity();
+        }
+
+        private static void ConfigureUserEntity(this ModelBuilder builder)
+        {
             builder.Entity<User>(b =>
             {
                 b.ToTable(IUser.UserTableName);
                 b.HasKey(user => user.Id);
 
-                b.Property(user => user.Username).HasMaxLength(1000);
-                b.Property(user => user.Email).HasMaxLength(1000);
+                b.Property(user => user.Username).HasMaxLength(1000).HasColumnName(nameof(IUser.Username));
+                b.Property(user => user.Email).HasMaxLength(1000).HasColumnName(nameof(IUser.Email));
                 b.Property(user => user.EmailToRevalidate).HasMaxLength(1000);
                 b.Property(user => user.SystemName).HasMaxLength(400);
 
                 b.Ignore(user => user.UserRoles);
             });
+        }
 
+        private static void ConfigureUserRoleEntity(this ModelBuilder builder)
+        {
             builder.Entity<UserRole>(b =>
             {
                 b.ToTable(nameof(UserRole));
@@ -30,7 +43,10 @@ namespace Buddy.EntityFrameworkCore
                 b.Property(role => role.Name).HasMaxLength(255).IsRequired();
                 b.Property(role => role.SystemName).HasMaxLength(255);
             });
+        }
 
+        private static void ConfigureUserUserRoleMappingEntity(this ModelBuilder builder)
+        {
             builder.Entity<UserUserRoleMapping>(b =>
             {
                 b.ToTable($"{IUser.UserTableName}_{nameof(UserRole)}_Mapping");
@@ -51,7 +67,10 @@ namespace Buddy.EntityFrameworkCore
 
                 b.Ignore(mapping => mapping.Id);
             });
+        }
 
+        private static void ConfigureUserPasswordEntity(this ModelBuilder builder)
+        {
             builder.Entity<UserPassword>(b =>
             {
                 b.ToTable(nameof(UserPassword));
@@ -64,7 +83,10 @@ namespace Buddy.EntityFrameworkCore
 
                 b.Ignore(password => password.PasswordFormat);
             });
+        }
 
+        private static void ConfigurePermissionRecordEntity(this ModelBuilder builder)
+        {
             builder.Entity<PermissionRecord>(b =>
             {
                 b.ToTable(nameof(PermissionRecord));
@@ -74,7 +96,10 @@ namespace Buddy.EntityFrameworkCore
                 b.Property(record => record.SystemName).HasMaxLength(255).IsRequired();
                 b.Property(record => record.Category).HasMaxLength(255).IsRequired();
             });
+        }
 
+        private static void ConfigurePermissionRecordUserRoleMappingEntity(this ModelBuilder builder)
+        {
             builder.Entity<PermissionRecordUserRoleMapping>(b =>
             {
                 b.ToTable($"{nameof(PermissionRecord)}_{nameof(UserRole)}_Mapping");

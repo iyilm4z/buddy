@@ -9,6 +9,12 @@ namespace Buddy.EntityFrameworkCore
         public static void ConfigureMultiTenancy<TDbContext>(this ModelBuilder builder)
             where TDbContext : IMultiTenancyDbContext
         {
+            builder.ConfigureTenantEntity();
+            builder.ConfigureTenantMappingEntity();
+        }
+
+        private static void ConfigureTenantEntity(this ModelBuilder builder)
+        {
             builder.Entity<Tenant>(b =>
             {
                 b.ToTable(nameof(Tenant));
@@ -18,7 +24,10 @@ namespace Buddy.EntityFrameworkCore
                 b.Property(tenant => tenant.Url).HasMaxLength(400).IsRequired();
                 b.Property(tenant => tenant.Hosts).HasMaxLength(1000);
             });
+        }
 
+        private static void ConfigureTenantMappingEntity(this ModelBuilder builder)
+        {
             builder.Entity<TenantMapping>(b =>
             {
                 b.ToTable(nameof(TenantMapping));

@@ -9,6 +9,11 @@ namespace Buddy.EntityFrameworkCore
         public static void ConfigureConfiguration<TDbContext>(this ModelBuilder builder)
             where TDbContext : IConfigurationDbContext
         {
+            builder.ConfigureSettingEntity();
+        }
+
+        private static void ConfigureSettingEntity(this ModelBuilder builder)
+        {
             builder.Entity<Setting>(b =>
             {
                 b.ToTable(nameof(Setting));
