@@ -6,7 +6,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\host\Buddy.Core\Buddy.Core.csproj" />
+		<ProjectReference Include="..\..\app\Buddy.Core\Buddy.Core.csproj" />
 	</ItemGroup>
 
 </Project>

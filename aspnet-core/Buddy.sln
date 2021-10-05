@@ -7,25 +7,25 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{48F80D08-6C2
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{3FF0C80D-ED87-4353-893E-A4CE834F6282}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "host", "host", "{B918A679-96DA-47D3-90F2-6A7B8D6D19B4}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{B918A679-96DA-47D3-90F2-6A7B8D6D19B4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modules", "modules", "{D1651C61-E246-4B36-A1F8-EDD84E3A6E29}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Buddy.Core", "src\host\Buddy.Core\Buddy.Core.csproj", "{205423E1-6C92-406F-ADEF-83075CD84125}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Buddy.Core", "src\app\Buddy.Core\Buddy.Core.csproj", "{205423E1-6C92-406F-ADEF-83075CD84125}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Buddy.Web", "src\host\Buddy.Web\Buddy.Web.csproj", "{879A0C30-8516-4C28-9441-427A31C6AD7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Buddy.Web", "src\app\Buddy.Web\Buddy.Web.csproj", "{879A0C30-8516-4C28-9441-427A31C6AD7A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Buddy.EntityFrameworkCore", "src\host\Buddy.EntityFrameworkCore\Buddy.EntityFrameworkCore.csproj", "{AD210DE2-5C0C-4950-84CC-DDAE65CCF7B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Buddy.EntityFrameworkCore", "src\app\Buddy.EntityFrameworkCore\Buddy.EntityFrameworkCore.csproj", "{AD210DE2-5C0C-4950-84CC-DDAE65CCF7B8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Buddy.Localization", "src\modules\Buddy.Localization\Buddy.Localization.csproj", "{5753D5A9-A3F7-4102-B5D7-C4FD388A3AB9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Buddy.Localization.Shared", "src\modules\Buddy.Localization.Shared\Buddy.Localization.Shared.csproj", "{44E646E7-7675-4856-8303-0DC9A91BF545}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "host", "host", "{62156DD9-E35E-4B3C-A4F2-122ABAAE205F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{62156DD9-E35E-4B3C-A4F2-122ABAAE205F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modules", "modules", "{E6EC55DB-A930-4DD2-BBF6-3B4E6E7C1CF4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Buddy.Core.Tests", "test\host\Buddy.Core.Tests\Buddy.Core.Tests.csproj", "{240E8F51-4810-4127-9ADF-8B9C83E4AC33}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Buddy.Core.Tests", "test\app\Buddy.Core.Tests\Buddy.Core.Tests.csproj", "{240E8F51-4810-4127-9ADF-8B9C83E4AC33}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Buddy.Localization.Tests", "test\modules\Buddy.Localization.Tests\Buddy.Localization.Tests.csproj", "{3F563137-2831-478D-AF7C-9DD5958ADDF9}"
 EndProject
@@ -33,17 +33,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Buddy.Logging", "src\module
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Buddy.Logging.Shared", "src\modules\Buddy.Logging.Shared\Buddy.Logging.Shared.csproj", "{42818C56-6B67-487B-946A-684475832D45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buddy.MultiTenancy", "src\modules\Buddy.MultiTenancy\Buddy.MultiTenancy.csproj", "{49B8382A-4068-4B50-9BE0-7ABDE0C028A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Buddy.MultiTenancy", "src\modules\Buddy.MultiTenancy\Buddy.MultiTenancy.csproj", "{49B8382A-4068-4B50-9BE0-7ABDE0C028A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buddy.MultiTenancy.Shared", "src\modules\Buddy.MultiTenancy.Shared\Buddy.MultiTenancy.Shared.csproj", "{879A60CD-82ED-482E-81DB-DFFB4496490C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Buddy.MultiTenancy.Shared", "src\modules\Buddy.MultiTenancy.Shared\Buddy.MultiTenancy.Shared.csproj", "{879A60CD-82ED-482E-81DB-DFFB4496490C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buddy.Configuration", "src\modules\Buddy.Configuration\Buddy.Configuration.csproj", "{68C82FBF-FEFB-4741-A434-0F6C9174E70B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Buddy.Configuration", "src\modules\Buddy.Configuration\Buddy.Configuration.csproj", "{68C82FBF-FEFB-4741-A434-0F6C9174E70B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buddy.Configuration.Shared", "src\modules\Buddy.Configuration.Shared\Buddy.Configuration.Shared.csproj", "{C6F42CFB-2B99-4CC8-B412-161C259D6317}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Buddy.Configuration.Shared", "src\modules\Buddy.Configuration.Shared\Buddy.Configuration.Shared.csproj", "{C6F42CFB-2B99-4CC8-B412-161C259D6317}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buddy.Users.Shared", "src\modules\Buddy.Users.Shared\Buddy.Users.Shared.csproj", "{D37C168C-DFE3-4A0A-9E17-D0F576534507}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Buddy.Users.Shared", "src\modules\Buddy.Users.Shared\Buddy.Users.Shared.csproj", "{D37C168C-DFE3-4A0A-9E17-D0F576534507}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buddy.Users", "src\modules\Buddy.Users\Buddy.Users.csproj", "{EF2D0AF5-AC73-413B-9FC7-2E81E8A61F3C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Buddy.Users", "src\modules\Buddy.Users\Buddy.Users.csproj", "{EF2D0AF5-AC73-413B-9FC7-2E81E8A61F3C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -11,22 +11,22 @@
 
     <title>Buddy | @ViewData["Title"]</title>
 
-    <link rel="icon" type="image/png" href="~/lib/admin-lte/dist/img/AdminLTELogo.png"/>
+    <link rel="icon" type="image/png" href="~/libs/admin-lte/dist/img/AdminLTELogo.png" />
 
     @await Html.PartialAsync("_Styles.cshtml")
     @await RenderSectionAsync("Styles", false)
 </head>
 <body class="hold-transition sidebar-mini">
-<div class="wrapper">
-    @(await Component.InvokeAsync<HeaderViewComponent>())
-    @(await Component.InvokeAsync<SidebarViewComponent>())
-    <div class="content-wrapper">
-        @RenderBody()
+    <div class="wrapper">
+        @(await Component.InvokeAsync<HeaderViewComponent>())
+        @(await Component.InvokeAsync<SidebarViewComponent>())
+        <div class="content-wrapper">
+            @RenderBody()
+        </div>
+        @(await Component.InvokeAsync<ControlSidebarViewComponent>())
+        @(await Component.InvokeAsync<FooterViewComponent>())
     </div>
-    @(await Component.InvokeAsync<ControlSidebarViewComponent>())
-    @(await Component.InvokeAsync<FooterViewComponent>())
-</div>
-@await Html.PartialAsync("_Scripts.cshtml")
-@await RenderSectionAsync("Scripts", false)
+    @await Html.PartialAsync("_Scripts.cshtml")
+    @await RenderSectionAsync("Scripts", false)
 </body>
 </html>

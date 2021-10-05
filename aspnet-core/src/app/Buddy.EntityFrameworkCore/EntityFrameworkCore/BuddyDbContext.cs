@@ -20,13 +20,13 @@ namespace Buddy.EntityFrameworkCore
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.ConfigureConfiguration<BuddyDbContext>();
             modelBuilder.ConfigureLocalization<BuddyDbContext>();
             modelBuilder.ConfigureLogging<BuddyDbContext, User>();
             modelBuilder.ConfigureMultiTenancy<BuddyDbContext>();
             modelBuilder.ConfigureUsers<BuddyDbContext>();
-
-            base.OnModelCreating(modelBuilder);
         }
 
         // Configuration

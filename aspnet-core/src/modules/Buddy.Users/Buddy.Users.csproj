@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
 	<PropertyGroup>
 		<TargetFramework>net5.0</TargetFramework>
@@ -15,7 +15,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\host\Buddy.EntityFrameworkCore\Buddy.EntityFrameworkCore.csproj" />
+		<ProjectReference Include="..\..\app\Buddy.EntityFrameworkCore\Buddy.EntityFrameworkCore.csproj" />
 		<ProjectReference Include="..\Buddy.Users.Shared\Buddy.Users.Shared.csproj" />
 	</ItemGroup>
 

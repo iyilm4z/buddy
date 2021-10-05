@@ -9,6 +9,7 @@ namespace Buddy.EntityFrameworkCore
     {
         public void Register(ContainerBuilder builder, ITypeFinder typeFinder, BuddyConfig config)
         {
+
         }
 
         public int Order => 20;
