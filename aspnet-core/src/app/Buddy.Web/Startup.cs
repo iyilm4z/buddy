@@ -36,19 +36,7 @@ namespace Buddy.Web
             services.AddControllersWithViews()
                 .AddRazorRuntimeCompilation();
 
-            services.Configure<MvcRazorRuntimeCompilationOptions>(options =>
-            {
-                var moduleFolderPath =
-                    Path.GetFullPath(Path.Combine(HostEnvironment.ContentRootPath, "..", "..", "modules"));
-                var modulePaths = Directory.GetDirectories(moduleFolderPath)
-                    .Where(dir => !dir.EndsWith(".Shared"))
-                    .ToList();
-
-                foreach (var modulePath in modulePaths)
-                {
-                    options.FileProviders.Add(new PhysicalFileProvider(modulePath));
-                }
-            });
+            services.ConfigureBuddyModuleRazorRuntimeCompilation(HostEnvironment);
 
             services.Configure<RazorViewEngineOptions>(options =>
             {
