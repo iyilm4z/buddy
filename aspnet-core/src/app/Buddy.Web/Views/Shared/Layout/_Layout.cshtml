@@ -9,9 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>Buddy | @ViewData["Title"]</title>
+    <title>Buddy | @ViewBag.PageTitle</title>
 
-    <link rel="icon" type="image/png" href="~/libs/admin-lte/dist/img/AdminLTELogo.png" />
+    <link rel="icon" type="image/png" href="~/img/buddy-favicon.ico" />
 
     @await Html.PartialAsync("_Styles.cshtml")
     @await RenderSectionAsync("Styles", false)

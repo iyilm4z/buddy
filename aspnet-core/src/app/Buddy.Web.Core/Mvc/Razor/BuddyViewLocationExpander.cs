@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.Razor;
 [assembly: AspMvcViewLocationFormat("/Web/Views/{1}/{0}.cshtml")]
 [assembly: AspMvcViewLocationFormat("/Web/Views/Shared/{0}.cshtml")]
 
-namespace Buddy.Mvc.Razor
+namespace Buddy.Web.Mvc.Razor
 {
     public class BuddyViewLocationExpander : IViewLocationExpander
     {

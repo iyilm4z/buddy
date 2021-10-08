@@ -1,0 +1,28 @@
+@model LanguageModel
+
+@{
+    ViewBag.PageTitle = "Languages.EditLanguageDetails";
+}
+
+<form asp-controller="Language" asp-action="Edit" method="post">
+    <div class="content-header clearfix">
+        <h1 class="float-left">
+            Languages.EditLanguageDetails - @Model.Name
+            <small>
+                <i class="fas fa-arrow-circle-left"></i>
+                <a asp-action="Index">Languages.BackToList</a>
+            </small>
+        </h1>
+        <div class="float-right">
+            <button type="submit" name="save" class="btn btn-primary">
+                <i class="far fa-save"></i>
+                Common.Save
+            </button>
+            <span id="language-delete" class="btn btn-danger">
+                <i class="far fa-trash-alt"></i>
+                Common.Delete
+            </span>
+        </div>
+    </div>
+    @await Html.PartialAsync("_CreateOrUpdate", Model)
+</form>

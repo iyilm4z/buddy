@@ -1,15 +1,11 @@
-using System.IO;
-using System.Linq;
 using Buddy.EntityFrameworkCore;
-using Buddy.Mvc.Razor;
+using Buddy.Web.Mvc.Razor;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 
 namespace Buddy.Web
