@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc.Razor;
 
 [assembly: AspMvcViewLocationFormat("/Web/Views/{1}/{0}.cshtml")]
 [assembly: AspMvcViewLocationFormat("/Web/Views/Shared/{0}.cshtml")]
+[assembly: AspMvcViewLocationFormat("/Web/Pages/{1}/{0}.cshtml")]
+[assembly: AspMvcViewLocationFormat("/Web/Pages/Shared/{0}.cshtml")]
 
 namespace Buddy.Web.Mvc.Razor
 {

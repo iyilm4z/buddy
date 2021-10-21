@@ -3,6 +3,7 @@ using Buddy.Web.Mvc.Razor;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,7 +21,7 @@ namespace Buddy.Web
 
         public IConfiguration Configuration { get; }
 
-        public IWebHostEnvironment HostEnvironment { get; set; }
+        public IWebHostEnvironment HostEnvironment { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -28,8 +29,8 @@ namespace Buddy.Web
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDatabaseDeveloperPageExceptionFilter();
-
-            services.AddControllersWithViews()
+            
+            services.AddMvc()
                 .AddRazorRuntimeCompilation();
 
             services.ConfigureBuddyModuleRazorRuntimeCompilation(HostEnvironment);
@@ -37,6 +38,11 @@ namespace Buddy.Web
             services.Configure<RazorViewEngineOptions>(options =>
             {
                 options.ViewLocationExpanders.Add(new BuddyViewLocationExpander());
+            });
+
+            services.Configure<RazorPagesOptions>(options =>
+            {
+                options.RootDirectory = "/Web/Pages";
             });
         }
 
@@ -60,6 +66,7 @@ namespace Buddy.Web
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();
+                endpoints.MapRazorPages();
             });
         }
     }

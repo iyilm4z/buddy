@@ -1,31 +1,21 @@
-﻿using Buddy.Web.Models;
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+﻿using Buddy.Localization.Application;
+using Buddy.Localization.Application.Dto;
+using Buddy.Web.Mvc;
 
 namespace Buddy.Web.Controllers
 {
-    public class LanguageController : Controller
+    public class LanguageController : BuddyControllerBase, ILanguageAppService
     {
-        public IActionResult Index()
-        {
-            var languages = new List<LanguageModel>
-            {
-                new LanguageModel{Id = 1, Name = "Foo"},
-                new LanguageModel{Id = 1, Name = "Bar"},
-                new LanguageModel{Id = 1, Name = "Baz"}
-            };
+        private readonly ILanguageAppService _languageAppService;
 
-            return View(languages);
+        public LanguageController(ILanguageAppService languageAppService)
+        {
+            _languageAppService = languageAppService;
         }
 
-        public IActionResult Create()
+        public LanguageDto Get()
         {
-            return View();
-        }
-
-        public IActionResult Edit()
-        {
-            return View();
+            return _languageAppService.Get();
         }
     }
 }

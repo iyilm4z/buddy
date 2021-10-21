@@ -1,16 +1,14 @@
-@model LanguageModel
+@page
+@model Buddy.Web.Pages.Language.CreateModel
+@{ ViewBag.PageTitle = "Languages.AddNew"; }
 
-@{
-    ViewBag.PageTitle = "Languages.AddNew";
-}
-
-<form asp-controller="Language" asp-action="Create" method="post">
+<form action="/Language/Create" method="post">
     <div class="content-header clearfix">
         <h1 class="float-left">
             Languages.AddNew
             <small>
                 <i class="fas fa-arrow-circle-left"></i>
-                <a asp-action="Index">Languages.BackToList</a>
+                <a href="/Language">Languages.BackToList</a>
             </small>
         </h1>
         <div class="float-right">
@@ -20,5 +18,5 @@
             </button>
         </div>
     </div>
-    @await Html.PartialAsync("_CreateOrUpdate", Model)
+    @await Html.PartialAsync("_CreateOrUpdate", Model.Language)
 </form>
