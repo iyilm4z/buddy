@@ -10,14 +10,7 @@ namespace Buddy.Reflection
 {
     public class BuddyAssemblyProvider : IAssemblyProvider
     {
-        private const string AssemblySkipLoadingPattern =
-            "^System|^mscorlib|^Microsoft|^netstandard|^AjaxControlToolkit|^Antlr3|^Autofac|" +
-            "^AutoMapper|^Castle|^ComponentArt|^CppCodeProvider|^DotNetOpenAuth|" +
-            "^EntityFramework|^EPPlus|^FluentValidation|^ImageResizer|^itextsharp|" +
-            "^log4net|^MaxMind|^MbUnit|^MiniProfiler|^Mono.Math|^MvcContrib|^Newtonsoft|" +
-            "^NHibernate|^nunit|^Org.Mentalis|^PerlRegex|^QuickGraph|^Recaptcha|" +
-            "^Remotion|^RestSharp|^Rhino|^Telerik|^Iesi|^TestDriven|^TestFu|" +
-            "^UserAgentStringLibrary|^VJSharpCodeProvider|^WebActivator|^WebDev|^WebGrease";
+        private const string AssemblyMatchLoadingPattern = "^Buddy";
 
         private const string AssemblyRestrictToLoadingPattern = ".*";
 
@@ -41,7 +34,7 @@ namespace Buddy.Reflection
 
         private static bool Matches(string assemblyFullName)
         {
-            return !Matches(assemblyFullName, AssemblySkipLoadingPattern)
+            return Matches(assemblyFullName, AssemblyMatchLoadingPattern)
                    && Matches(assemblyFullName, AssemblyRestrictToLoadingPattern);
         }
 

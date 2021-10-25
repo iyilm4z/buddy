@@ -1,16 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<TargetFramework>net5.0</TargetFramework>
-		<RootNamespace>Buddy</RootNamespace>
-	</PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <RootNamespace>Buddy</RootNamespace>
+    </PropertyGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
-		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
-		<PackageReference Include="JetBrains.Annotations" Version="2021.2.0" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.10" />
-		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
-	</ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+        <PackageReference Include="JetBrains.Annotations" Version="2021.2.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.10" />
+        <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    </ItemGroup>
 
 </Project>

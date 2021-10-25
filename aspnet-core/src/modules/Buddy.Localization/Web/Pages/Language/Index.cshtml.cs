@@ -1,10 +1,10 @@
 using Buddy.Web.Models;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
+using Buddy.Web.Mvc.RazorPages;
 
 namespace Buddy.Web.Pages.Language
 {
-    public class IndexModel : PageModel
+    public class IndexModel : BuddyPageModelBase
     {
         public IEnumerable<LanguageModel> Languages { get; set; }
 

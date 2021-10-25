@@ -2,6 +2,8 @@
 @model Buddy.Web.Pages.Language.IndexModel    
 @{ ViewBag.PageTitle = "Languages"; }
 
+<script src="~/localization/js/scripts.js"></script>
+
 <div class="content-header clearfix">
     <h1 class="float-left">
         Languages
@@ -22,17 +24,17 @@
                     <div class="card-body p-0">
                         <table class="table table-striped">
                             <thead>
-                                <tr>
-                                    <th>Name</th>
-                                </tr>
+                            <tr>
+                                <th>Name</th>
+                            </tr>
                             </thead>
                             <tbody>
-                                @foreach (var item in Model.Languages)
-                                {
-                    <tr>
-                        <td>@item.Name</td>
-                    </tr>
-}
+                            @foreach (var item in Model.Languages)
+                            {
+                                <tr>
+                                    <td>@item.Name</td>
+                                </tr>
+                            }
                             </tbody>
                         </table>
                     </div>
@@ -41,3 +43,7 @@
         </div>
     </div>
 </section>
+
+<script>
+buddy.localization.ping();
+</script>

@@ -1,10 +1,10 @@
 using Buddy.Web.Models;
+using Buddy.Web.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Buddy.Web.Pages.Language
 {
-    public class CreateModel : PageModel
+    public class CreateModel : BuddyPageModelBase
     {
         [BindProperty]
         public LanguageModel Language { get; set; }
