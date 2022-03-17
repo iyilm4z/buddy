@@ -11,43 +11,35 @@ using Microsoft.Extensions.Hosting;
 
 namespace Buddy.Web
 {
-    public class Startup
+    public class BuddyWebStartup : IBuddyStartup
     {
-        public Startup(IConfiguration configuration, IWebHostEnvironment hostEnvironment)
-        {
-            Configuration = configuration;
-            HostEnvironment = hostEnvironment;
-        }
-
-        public IConfiguration Configuration { get; }
-
-        public IWebHostEnvironment HostEnvironment { get; }
-
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<BuddyDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDatabaseDeveloperPageExceptionFilter();
-            
+
             services.AddMvc()
                 .AddRazorRuntimeCompilation();
 
-            services.ConfigureBuddyModuleRazorRuntimeCompilation(HostEnvironment);
+            var serviceProvider = services.BuildServiceProvider();
+            var env = serviceProvider.GetService<IWebHostEnvironment>();
+
+            services.ConfigureBuddyModuleRazorRuntimeCompilation(env);
 
             services.Configure<RazorViewEngineOptions>(options =>
             {
                 options.ViewLocationExpanders.Add(new BuddyViewLocationExpander());
             });
 
-            services.Configure<RazorPagesOptions>(options =>
-            {
-                options.RootDirectory = "/Web/Pages";
-            });
+            services.Configure<RazorPagesOptions>(options => { options.RootDirectory = "/Web/Pages"; });
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
+            var env = app.ApplicationServices.GetService<IWebHostEnvironment>();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -69,5 +61,7 @@ namespace Buddy.Web
                 endpoints.MapRazorPages();
             });
         }
+
+        public int Order => int.MaxValue;
     }
 }

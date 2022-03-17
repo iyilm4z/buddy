@@ -1,19 +1,17 @@
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
+using Autofac.Extensions.DependencyInjection;
+using Buddy.Web;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 
-namespace Buddy.Web
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
+var builder = WebApplication.CreateBuilder(args);
 
-        public static IHostBuilder CreateHostBuilder(string[] args)
-        {
-            return Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
-        }
-    }
-}
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+builder.Configuration.AddEnvironmentVariables();
+
+builder.Services.ConfigureApplicationServices(builder);
+
+var app = builder.Build();
+
+app.ConfigureRequestPipeline();
+
+app.Run();

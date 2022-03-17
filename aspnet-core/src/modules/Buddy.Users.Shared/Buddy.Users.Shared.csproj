@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net5.0</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
         <RootNamespace>Buddy</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\app\Buddy.Core\Buddy.Core.csproj"/>
+        <ProjectReference Include="..\..\app\Buddy.Core\Buddy.Core.csproj" />
     </ItemGroup>
 
 </Project>
