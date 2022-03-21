@@ -1,109 +1,83 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using Buddy.Collections.Extensions;
 
 namespace Buddy.Reflection
 {
     public class BuddyTypeFinder : ITypeFinder
     {
-        private readonly IAssemblyProvider _assemblyProvider;
+        private readonly IAssemblyFinder _assemblyFinder;
+        private readonly object _syncObj = new();
+        private Type[] _types;
 
-        public BuddyTypeFinder(IAssemblyProvider assemblyProvider)
+        public BuddyTypeFinder(IAssemblyFinder assemblyFinder)
         {
-            _assemblyProvider = assemblyProvider;
+            _assemblyFinder = assemblyFinder;
         }
 
-        public IEnumerable<Type> FindClassesOfType<T>(bool onlyConcreteClasses = true)
+        public Type[] Find(Func<Type, bool> predicate)
         {
-            return FindClassesOfType(typeof(T), onlyConcreteClasses);
+            return GetAllTypes().Where(predicate).ToArray();
         }
 
-        public IEnumerable<Type> FindClassesOfType(Type assignTypeFrom, bool onlyConcreteClasses = true)
+        public Type[] FindAll()
         {
-            return FindClassesOfType(assignTypeFrom, _assemblyProvider.GetAssemblies(), onlyConcreteClasses);
+            return GetAllTypes().ToArray();
         }
 
-        public IEnumerable<Type> FindClassesOfType<T>(IEnumerable<Assembly> assemblies, bool onlyConcreteClasses = true)
+        private Type[] GetAllTypes()
         {
-            return FindClassesOfType(typeof(T), assemblies, onlyConcreteClasses);
-        }
-
-        public IEnumerable<Type> FindClassesOfType(Type assignTypeFrom, IEnumerable<Assembly> assemblies, bool onlyConcreteClasses = true)
-        {
-            var result = new List<Type>();
-
-            try
+            if (_types != null)
             {
-                foreach (var assembly in assemblies)
+                return _types;
+            }
+
+            lock (_syncObj)
+            {
+                _types ??= CreateTypeList().ToArray();
+            }
+
+            return _types;
+        }
+
+        private List<Type> CreateTypeList()
+        {
+            var allTypes = new List<Type>();
+
+            var assemblies = _assemblyFinder.GetAllAssemblies().Distinct();
+
+            foreach (var assembly in assemblies)
+            {
+                try
                 {
-                    Type[] types = null;
+                    Type[] typesInThisAssembly;
 
                     try
                     {
-                        types = assembly.GetTypes();
+                        typesInThisAssembly = assembly.GetTypes();
                     }
-                    catch
+                    catch (ReflectionTypeLoadException ex)
                     {
-                        // ignored
+                        typesInThisAssembly = ex.Types;
                     }
 
-                    if (types == null)
+                    if (typesInThisAssembly.IsNullOrEmpty())
                     {
                         continue;
                     }
 
-                    foreach (var type in types)
-                    {
-                        if (!assignTypeFrom.IsAssignableFrom(type)
-                            && (!assignTypeFrom.IsGenericTypeDefinition
-                                || !DoesTypeImplementOpenGeneric(type, assignTypeFrom)))
-                        {
-                            continue;
-                        }
-
-                        if (type.IsInterface)
-                        {
-                            continue;
-                        }
-
-                        if (onlyConcreteClasses)
-                        {
-                            if (type.IsClass && !type.IsAbstract)
-                            {
-                                result.Add(type);
-                            }
-                        }
-                        else
-                        {
-                            result.Add(type);
-                        }
-                    }
+                    allTypes.AddRange(typesInThisAssembly.Where(type => type != null));
+                }
+                catch (Exception ex)
+                {
+                    Trace.TraceWarning(ex.ToString(), ex);
                 }
             }
-            catch
-            {
-                // ignored
-            }
 
-            return result;
-        }
-
-        private static bool DoesTypeImplementOpenGeneric(Type type, Type openGeneric)
-        {
-            try
-            {
-                var genericTypeDefinition = openGeneric.GetGenericTypeDefinition();
-
-                return (from implementedInterface in type.FindInterfaces((objType, objCriteria) => true, null)
-                        where implementedInterface.IsGenericType
-                        select genericTypeDefinition.IsAssignableFrom(implementedInterface.GetGenericTypeDefinition()))
-                    .FirstOrDefault();
-            }
-            catch
-            {
-                return false;
-            }
+            return allTypes;
         }
     }
 }

@@ -9,8 +9,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\app\Buddy.EntityFrameworkCore\Buddy.EntityFrameworkCore.csproj" />
         <ProjectReference Include="..\..\app\Buddy.Web.Core\Buddy.Web.Core.csproj" />
-        <ProjectReference Include="..\Buddy.Users.Shared\Buddy.Users.Shared.csproj" />
     </ItemGroup>
 
 </Project>

@@ -1,4 +1,10 @@
+using Buddy.Configuration;
 using Buddy.EntityFrameworkCore;
+using Buddy.Localization;
+using Buddy.Logging;
+using Buddy.Modularity;
+using Buddy.MultiTenancy;
+using Buddy.Users;
 using Buddy.Web.Mvc.Razor;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,10 +17,22 @@ using Microsoft.Extensions.Hosting;
 
 namespace Buddy.Web
 {
-    public class BuddyWebStartup : IBuddyStartup
+    [DependsOn(
+        typeof(BuddyConfigurationModule),
+        typeof(BuddyLocalizationModule),
+        typeof(BuddyLoggingModule),
+        typeof(BuddyMultiTenancyModule),
+        typeof(BuddyUsersModule)
+    )]
+    public class BuddyWebModule : BuddyModule
     {
-        public void ConfigureServices(IServiceCollection services, IConfiguration configuration)
+        public override void ConfigureServices(IServiceCollection services)
         {
+            var serviceProvider = services.BuildServiceProvider();
+
+            var env = serviceProvider.GetService<IWebHostEnvironment>();
+            var configuration = serviceProvider.GetService<IConfiguration>();
+
             services.AddDbContext<BuddyDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
@@ -22,9 +40,6 @@ namespace Buddy.Web
 
             services.AddMvc()
                 .AddRazorRuntimeCompilation();
-
-            var serviceProvider = services.BuildServiceProvider();
-            var env = serviceProvider.GetService<IWebHostEnvironment>();
 
             services.ConfigureBuddyModuleRazorRuntimeCompilation(env);
 
@@ -36,7 +51,7 @@ namespace Buddy.Web
             services.Configure<RazorPagesOptions>(options => { options.RootDirectory = "/Web/Pages"; });
         }
 
-        public void Configure(IApplicationBuilder app)
+        public override void Configure(IApplicationBuilder app)
         {
             var env = app.ApplicationServices.GetService<IWebHostEnvironment>();
 
@@ -61,7 +76,5 @@ namespace Buddy.Web
                 endpoints.MapRazorPages();
             });
         }
-
-        public int Order => int.MaxValue;
     }
 }

@@ -7,12 +7,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.3" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.3"/>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Buddy.Core\Buddy.Core.csproj" />
-        <ProjectReference Include="..\Buddy.EntityFrameworkCore\Buddy.EntityFrameworkCore.csproj" />
+        <ProjectReference Include="..\Buddy.Core\Buddy.Core.csproj"/>
     </ItemGroup>
 
 </Project>
