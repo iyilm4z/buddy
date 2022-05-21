@@ -1,11 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
         <RootNamespace>Buddy</RootNamespace>
-        <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
-        <OutputType>Library</OutputType>
-        <StaticWebAssetBasePath>/</StaticWebAssetBasePath>
     </PropertyGroup>
 
     <ItemGroup>

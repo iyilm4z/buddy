@@ -14,16 +14,16 @@ namespace Buddy.Web
         {
             return services.Configure<MvcRazorRuntimeCompilationOptions>(options =>
             {
-                var moduleFolderPath =
-                    Path.GetFullPath(Path.Combine(hostEnvironment.ContentRootPath, "..", "..", "modules"));
-                var modulePaths = Directory.GetDirectories(moduleFolderPath)
-                    .Where(dir => !dir.EndsWith(".Shared"))
-                    .ToList();
-
-                foreach (var modulePath in modulePaths)
-                {
-                    options.FileProviders.Add(new PhysicalFileProvider(modulePath));
-                }
+                // var moduleFolderPath =
+                //     Path.GetFullPath(Path.Combine(hostEnvironment.ContentRootPath, "..", "..", "..", "modules"));
+                // var modulePaths = Directory.GetDirectories(moduleFolderPath)
+                //     .Where(dir => !dir.EndsWith(".Shared"))
+                //     .ToList();
+                //
+                // foreach (var modulePath in modulePaths)
+                // {
+                //     options.FileProviders.Add(new PhysicalFileProvider(modulePath));
+                // }
             });
         }
     }
