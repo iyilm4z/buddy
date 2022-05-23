@@ -7,7 +7,7 @@ using Buddy.Users;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Buddy
+namespace Buddy.Web
 {
     [DependsOn(
         typeof(BuddyWebMvcSharedModule),

@@ -1,12 +1,8 @@
 using Buddy.EntityFrameworkCore;
 using Buddy.Modularity;
-using Buddy.Web;
-using Buddy.Web.Mvc.Razor;
-using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace Buddy
+namespace Buddy.Web
 {
     [DependsOn(
         typeof(BuddyWebMvcAdminModule),
@@ -31,12 +27,12 @@ namespace Buddy
 
             services.ConfigureBuddyModuleRazorRuntimeCompilation(env);
 
-            services.Configure<RazorViewEngineOptions>(options =>
-            {
-                options.ViewLocationExpanders.Add(new BuddyViewLocationExpander());
-            });
+            // services.Configure<RazorViewEngineOptions>(options =>
+            // {
+            //     options.ViewLocationExpanders.Add(new BuddyViewLocationExpander());
+            // });
 
-            services.Configure<RazorPagesOptions>(options => { options.RootDirectory = "/Web/Pages"; });
+            //services.Configure<RazorPagesOptions>(options => { options.RootDirectory = "/Web/Pages"; });
         }
 
         public override void Configure(IApplicationBuilder app)

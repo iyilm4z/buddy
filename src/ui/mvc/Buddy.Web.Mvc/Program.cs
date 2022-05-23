@@ -1,5 +1,6 @@
 using Autofac.Extensions.DependencyInjection;
 using Buddy;
+using Buddy.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 

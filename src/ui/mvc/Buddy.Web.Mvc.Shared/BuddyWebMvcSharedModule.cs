@@ -1,9 +1,8 @@
 ﻿using Buddy.Modularity;
-using Buddy.Web;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Buddy;
+namespace Buddy.Web;
 
 [DependsOn(
     typeof(BuddyWebCoreModule)
