@@ -1,6 +1,5 @@
-﻿namespace Buddy.Application
+﻿namespace Buddy.Application;
+
+public interface IApplicationService
 {
-    public interface IApplicationService
-    {
-    }
 }

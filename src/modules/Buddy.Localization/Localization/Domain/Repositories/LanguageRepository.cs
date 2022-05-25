@@ -1,9 +1,8 @@
 ﻿using Buddy.Domain.Repositories;
 using Buddy.Localization.Domain.Entities;
 
-namespace Buddy.Localization.Domain.Repositories
+namespace Buddy.Localization.Domain.Repositories;
+
+public class LanguageRepository : EfCoreRepository<Language>, ILanguageRepository
 {
-    public class LanguageRepository : EfCoreRepository<Language>, ILanguageRepository
-    {
-    }
 }

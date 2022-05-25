@@ -1,23 +1,22 @@
-﻿namespace Buddy.Users.Domain.Entities
+﻿namespace Buddy.Users.Domain.Entities;
+
+/// <summary>
+///     Password format
+/// </summary>
+public enum PasswordFormat
 {
     /// <summary>
-    ///     Password format
+    ///     Clear
     /// </summary>
-    public enum PasswordFormat
-    {
-        /// <summary>
-        ///     Clear
-        /// </summary>
-        Clear = 0,
+    Clear = 0,
 
-        /// <summary>
-        ///     Hashed
-        /// </summary>
-        Hashed = 1,
+    /// <summary>
+    ///     Hashed
+    /// </summary>
+    Hashed = 1,
 
-        /// <summary>
-        ///     Encrypted
-        /// </summary>
-        Encrypted = 2
-    }
+    /// <summary>
+    ///     Encrypted
+    /// </summary>
+    Encrypted = 2
 }

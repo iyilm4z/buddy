@@ -2,13 +2,12 @@
 using Buddy.Application;
 using Buddy.Logging.Application.Dto;
 
-namespace Buddy.Logging.Application
+namespace Buddy.Logging.Application;
+
+public class LogAppService : ApplicationService, ILogAppService
 {
-    public class LogAppService : ApplicationService, ILogAppService
+    public LogDto Get()
     {
-        public LogDto Get()
-        {
-            throw new NotImplementedException();
-        }
+        throw new NotImplementedException();
     }
 }

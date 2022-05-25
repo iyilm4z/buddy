@@ -15,64 +15,63 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Buddy.Web
+namespace Buddy.Web;
+
+[DependsOn(
+    typeof(BuddyConfigurationModule),
+    typeof(BuddyLocalizationModule),
+    typeof(BuddyLoggingModule),
+    typeof(BuddyMultiTenancyModule),
+    typeof(BuddyUsersModule)
+)]
+public class BuddyWebApiModule : BuddyModule
 {
-    [DependsOn(
-        typeof(BuddyConfigurationModule),
-        typeof(BuddyLocalizationModule),
-        typeof(BuddyLoggingModule),
-        typeof(BuddyMultiTenancyModule),
-        typeof(BuddyUsersModule)
-    )]
-    public class BuddyWebApiModule : BuddyModule
+    public override void ConfigureServices(IServiceCollection services)
     {
-        public override void ConfigureServices(IServiceCollection services)
+        var serviceProvider = services.BuildServiceProvider();
+
+        var env = serviceProvider.GetService<IWebHostEnvironment>();
+        var configuration = serviceProvider.GetService<IConfiguration>();
+
+        services.AddDbContext<BuddyDbContext>(options =>
+            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
+        services.AddDatabaseDeveloperPageExceptionFilter();
+
+        services.AddControllers();
+
+        services.ConfigureBuddyModuleRazorRuntimeCompilation(env);
+
+        services.Configure<RazorViewEngineOptions>(options =>
         {
-            var serviceProvider = services.BuildServiceProvider();
+            options.ViewLocationExpanders.Add(new BuddyViewLocationExpander());
+        });
 
-            var env = serviceProvider.GetService<IWebHostEnvironment>();
-            var configuration = serviceProvider.GetService<IConfiguration>();
+        services.Configure<RazorPagesOptions>(options => { options.RootDirectory = "/Web/Pages"; });
+    }
 
-            services.AddDbContext<BuddyDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+    public override void Configure(IApplicationBuilder app)
+    {
+        var env = app.ApplicationServices.GetService<IWebHostEnvironment>();
 
-            services.AddDatabaseDeveloperPageExceptionFilter();
-
-            services.AddControllers();
-
-            services.ConfigureBuddyModuleRazorRuntimeCompilation(env);
-
-            services.Configure<RazorViewEngineOptions>(options =>
-            {
-                options.ViewLocationExpanders.Add(new BuddyViewLocationExpander());
-            });
-
-            services.Configure<RazorPagesOptions>(options => { options.RootDirectory = "/Web/Pages"; });
+        if (env.IsDevelopment())
+        {
+            app.UseDeveloperExceptionPage();
+        }
+        else
+        {
+            app.UseExceptionHandler("/Error");
         }
 
-        public override void Configure(IApplicationBuilder app)
+        app.UseStaticFiles();
+
+        app.UseRouting();
+
+        app.UseAuthorization();
+
+        app.UseEndpoints(endpoints =>
         {
-            var env = app.ApplicationServices.GetService<IWebHostEnvironment>();
-
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Error");
-            }
-
-            app.UseStaticFiles();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
-        }
+            endpoints.MapControllers();
+        });
     }
 }

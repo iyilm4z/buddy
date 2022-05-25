@@ -1,6 +1,5 @@
-﻿namespace Buddy.Domain.Services
+﻿namespace Buddy.Domain.Services;
+
+public abstract class DomainService : IDomainService
 {
-    public abstract class DomainService : IDomainService
-    {
-    }
 }

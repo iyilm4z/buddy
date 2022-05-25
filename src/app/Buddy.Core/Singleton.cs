@@ -1,30 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Buddy
-{
-    public abstract class SingletonBase
-    {
-        static SingletonBase()
-        {
-            AllSingletons = new Dictionary<Type, object>();
-        }
+namespace Buddy;
 
-        protected static IDictionary<Type, object> AllSingletons { get; }
+public abstract class SingletonBase
+{
+    static SingletonBase()
+    {
+        AllSingletons = new Dictionary<Type, object>();
     }
 
-    public class Singleton<T> : SingletonBase
-    {
-        private static T _instance;
+    protected static IDictionary<Type, object> AllSingletons { get; }
+}
 
-        public static T Instance
+public class Singleton<T> : SingletonBase
+{
+    private static T _instance;
+
+    public static T Instance
+    {
+        get => _instance;
+        set
         {
-            get => _instance;
-            set
-            {
-                _instance = value;
-                AllSingletons[typeof(T)] = value;
-            }
+            _instance = value;
+            AllSingletons[typeof(T)] = value;
         }
     }
 }

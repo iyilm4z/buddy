@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Buddy.Web.Pages.Shared.Components.HeaderNotificationsMenu
+namespace Buddy.Web.Pages.Shared.Components.HeaderNotificationsMenu;
+
+public class HeaderNotificationsMenuViewComponent : ViewComponent
 {
-    public class HeaderNotificationsMenuViewComponent : ViewComponent
+    public IViewComponentResult Invoke()
     {
-        public IViewComponentResult Invoke()
-        {
-            return View();
-        }
+        return View();
     }
 }

@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Buddy.Dependency
+namespace Buddy.Dependency;
+
+public interface IServiceLocator
 {
-    public interface IServiceLocator
-    {
-        void SetServiceProvider(IServiceProvider serviceProvider);
+    void SetServiceProvider(IServiceProvider serviceProvider);
 
-        T Resolve<T>() where T : class;
+    T Resolve<T>() where T : class;
 
-        object Resolve(Type type);
+    object Resolve(Type type);
 
-        IEnumerable<T> ResolveAll<T>();
+    IEnumerable<T> ResolveAll<T>();
 
-        object ResolveUnregistered(Type type);
-    }
+    object ResolveUnregistered(Type type);
 }

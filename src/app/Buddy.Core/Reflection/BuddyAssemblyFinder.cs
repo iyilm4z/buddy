@@ -3,28 +3,27 @@ using System.Linq;
 using System.Reflection;
 using Buddy.Modularity;
 
-namespace Buddy.Reflection
+namespace Buddy.Reflection;
+
+public class BuddyAssemblyFinder : IAssemblyFinder
 {
-    public class BuddyAssemblyFinder : IAssemblyFinder
+    private readonly IBuddyModuleContainer _moduleContainer;
+
+    public BuddyAssemblyFinder(IBuddyModuleContainer moduleContainer)
     {
-        private readonly IBuddyModuleContainer _moduleContainer;
+        _moduleContainer = moduleContainer;
+    }
 
-        public BuddyAssemblyFinder(IBuddyModuleContainer moduleContainer)
+    public List<Assembly> GetAllAssemblies()
+    {
+        var assemblies = new List<Assembly>();
+
+        foreach (var module in _moduleContainer.Modules)
         {
-            _moduleContainer = moduleContainer;
+            assemblies.Add(module.Assembly);
+            assemblies.AddRange(module.Instance.GetAdditionalAssemblies());
         }
 
-        public List<Assembly> GetAllAssemblies()
-        {
-            var assemblies = new List<Assembly>();
-
-            foreach (var module in _moduleContainer.Modules)
-            {
-                assemblies.Add(module.Assembly);
-                assemblies.AddRange(module.Instance.GetAdditionalAssemblies());
-            }
-
-            return assemblies.Distinct().ToList();
-        }
+        return assemblies.Distinct().ToList();
     }
 }

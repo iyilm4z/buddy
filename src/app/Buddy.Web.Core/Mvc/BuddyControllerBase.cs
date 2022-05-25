@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Buddy.Web.Mvc
+namespace Buddy.Web.Mvc;
+
+[Route("api/[controller]")]
+[ApiController]
+public class BuddyControllerBase : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class BuddyControllerBase : ControllerBase
-    {
-    }
 }

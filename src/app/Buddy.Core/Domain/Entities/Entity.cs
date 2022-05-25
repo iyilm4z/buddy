@@ -1,12 +1,11 @@
 ﻿using System;
 
-namespace Buddy.Domain.Entities
-{
-    [Serializable]
-    public abstract class Entity
-    {
-        public int Id { get; set; }
+namespace Buddy.Domain.Entities;
 
-        public override string ToString() => $"[{GetType().Name} {Id}]";
-    }
+[Serializable]
+public abstract class Entity
+{
+    public int Id { get; set; }
+
+    public override string ToString() => $"[{GetType().Name} {Id}]";
 }

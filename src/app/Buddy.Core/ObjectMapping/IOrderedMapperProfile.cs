@@ -1,7 +1,6 @@
-﻿namespace Buddy.ObjectMapping
+﻿namespace Buddy.ObjectMapping;
+
+public interface IOrderedMapperProfile
 {
-    public interface IOrderedMapperProfile
-    {
-        int Order { get; }
-    }
+    int Order { get; }
 }

@@ -4,41 +4,40 @@ using Buddy.Modularity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Buddy
+namespace Buddy;
+
+public class BuddyApplication : IBuddyModuleContainer
 {
-    public class BuddyApplication : IBuddyModuleContainer
+    private readonly IServiceCollection _services;
+    private readonly Type _startupModuleType;
+
+    public IReadOnlyList<BuddyModuleInfo> Modules { get; private set; }
+
+    public BuddyApplication(Type startupModuleType, IServiceCollection services)
     {
-        private readonly IServiceCollection _services;
-        private readonly Type _startupModuleType;
+        _startupModuleType = startupModuleType ?? throw new ArgumentNullException(nameof(startupModuleType));
+        _services = services ?? throw new ArgumentNullException(nameof(services));
 
-        public IReadOnlyList<BuddyModuleInfo> Modules { get; private set; }
+        services.AddSingleton(this);
+        services.AddSingleton<IBuddyModuleContainer>(this);
+        services.AddCoreModuleServices(this);
+    }
 
-        public BuddyApplication(Type startupModuleType, IServiceCollection services)
+    public void LoadModules()
+    {
+        Modules = BuddyModuleLoader.LoadModules(_services, _startupModuleType);
+
+        foreach (var module in Modules)
         {
-            _startupModuleType = startupModuleType ?? throw new ArgumentNullException(nameof(startupModuleType));
-            _services = services ?? throw new ArgumentNullException(nameof(services));
-
-            services.AddSingleton(this);
-            services.AddSingleton<IBuddyModuleContainer>(this);
-            services.AddCoreModuleServices(this);
+            module.Instance.ConfigureServices(_services);
         }
+    }
 
-        public void LoadModules()
+    public void InitModules(IApplicationBuilder app)
+    {
+        foreach (var module in Modules)
         {
-            Modules = BuddyModuleLoader.LoadModules(_services, _startupModuleType);
-
-            foreach (var module in Modules)
-            {
-                module.Instance.ConfigureServices(_services);
-            }
-        }
-
-        public void InitModules(IApplicationBuilder app)
-        {
-            foreach (var module in Modules)
-            {
-                module.Instance.Configure(app);
-            }
+            module.Instance.Configure(app);
         }
     }
 }

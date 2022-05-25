@@ -2,19 +2,18 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Buddy.Logging
-{
-    [DependsOn(
-        typeof(BuddyCoreModule)
-    )]
-    public class BuddyLoggingSharedModule : BuddyModule
-    {
-        public override void ConfigureServices(IServiceCollection services)
-        {
-        }
+namespace Buddy.Logging;
 
-        public override void Configure(IApplicationBuilder app)
-        {
-        }
+[DependsOn(
+    typeof(BuddyCoreModule)
+)]
+public class BuddyLoggingSharedModule : BuddyModule
+{
+    public override void ConfigureServices(IServiceCollection services)
+    {
+    }
+
+    public override void Configure(IApplicationBuilder app)
+    {
     }
 }

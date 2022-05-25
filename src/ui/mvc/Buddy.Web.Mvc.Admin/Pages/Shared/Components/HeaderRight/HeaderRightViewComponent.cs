@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Buddy.Web.Pages.Shared.Components.HeaderRight
+namespace Buddy.Web.Pages.Shared.Components.HeaderRight;
+
+public class HeaderRightViewComponent : ViewComponent
 {
-    public class HeaderRightViewComponent : ViewComponent
+    public IViewComponentResult Invoke()
     {
-        public IViewComponentResult Invoke()
-        {
-            return View();
-        }
+        return View();
     }
 }

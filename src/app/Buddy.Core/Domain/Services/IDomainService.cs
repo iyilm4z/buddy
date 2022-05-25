@@ -1,6 +1,5 @@
-﻿namespace Buddy.Domain.Services
+﻿namespace Buddy.Domain.Services;
+
+public interface IDomainService
 {
-    public interface IDomainService
-    {
-    }
 }

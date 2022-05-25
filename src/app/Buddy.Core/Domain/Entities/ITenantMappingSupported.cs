@@ -1,7 +1,6 @@
-﻿namespace Buddy.Domain.Entities
+﻿namespace Buddy.Domain.Entities;
+
+public interface ITenantMappingSupported
 {
-    public interface ITenantMappingSupported
-    {
-        public bool LimitedToTenants { get; set; }
-    }
+    public bool LimitedToTenants { get; set; }
 }

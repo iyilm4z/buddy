@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 
-namespace Buddy.Reflection
+namespace Buddy.Reflection;
+
+public interface IAssemblyFinder
 {
-    public interface IAssemblyFinder
-    {
-        List<Assembly> GetAllAssemblies();
-    }
+    List<Assembly> GetAllAssemblies();
 }

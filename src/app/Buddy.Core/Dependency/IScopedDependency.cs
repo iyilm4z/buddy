@@ -1,6 +1,5 @@
-﻿namespace Buddy.Dependency
+﻿namespace Buddy.Dependency;
+
+public interface IScopedDependency
 {
-    public interface IScopedDependency
-    {
-    }
 }

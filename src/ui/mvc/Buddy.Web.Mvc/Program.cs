@@ -1,6 +1,8 @@
 using Autofac.Extensions.DependencyInjection;
 using Buddy;
 using Buddy.Web;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 

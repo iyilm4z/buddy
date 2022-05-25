@@ -1,7 +1,6 @@
-﻿namespace Buddy.Configuration
+﻿namespace Buddy.Configuration;
+
+public class BuddyConfig
 {
-    public class BuddyConfig
-    {
-        public string DataConnectionString { get; set; }
-    }
+    public string DataConnectionString { get; set; }
 }

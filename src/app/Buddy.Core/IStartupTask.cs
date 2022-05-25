@@ -1,11 +1,10 @@
 ﻿using System.Threading.Tasks;
 
-namespace Buddy
-{
-    public interface IStartupTask
-    {
-        Task Execute();
+namespace Buddy;
 
-        int Order { get; }
-    }
+public interface IStartupTask
+{
+    Task Execute();
+
+    int Order { get; }
 }

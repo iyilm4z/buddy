@@ -1,6 +1,5 @@
-﻿namespace Buddy.Web
+﻿namespace Buddy.Web;
+
+public static class ApplicationBuilderExtensions
 {
-    public static class ApplicationBuilderExtensions
-    {
-    }
 }

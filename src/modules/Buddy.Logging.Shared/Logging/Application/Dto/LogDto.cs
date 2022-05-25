@@ -1,6 +1,5 @@
-﻿namespace Buddy.Logging.Application.Dto
+﻿namespace Buddy.Logging.Application.Dto;
+
+public class LogDto
 {
-    public class LogDto
-    {
-    }
 }

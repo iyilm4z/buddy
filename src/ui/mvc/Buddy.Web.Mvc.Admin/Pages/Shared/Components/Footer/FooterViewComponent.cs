@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Buddy.Web.Pages.Shared.Components.Footer
+namespace Buddy.Web.Pages.Shared.Components.Footer;
+
+public class FooterViewComponent : ViewComponent
 {
-    public class FooterViewComponent : ViewComponent
+    public IViewComponentResult Invoke()
     {
-        public IViewComponentResult Invoke()
-        {
-            return View();
-        }
+        return View();
     }
 }

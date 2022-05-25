@@ -1,14 +1,13 @@
 ﻿using Buddy.Logging.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Buddy.EntityFrameworkCore
+namespace Buddy.EntityFrameworkCore;
+
+public interface ILoggingDbContext
 {
-    public interface ILoggingDbContext
-    {
-        DbSet<Log> Logs { get; set; }
+    DbSet<Log> Logs { get; set; }
 
-        DbSet<ActivityLog> ActivityLogs { get; set; }
+    DbSet<ActivityLog> ActivityLogs { get; set; }
 
-        DbSet<ActivityLogType> ActivityLogTypes { get; set; }
-    }
+    DbSet<ActivityLogType> ActivityLogTypes { get; set; }
 }

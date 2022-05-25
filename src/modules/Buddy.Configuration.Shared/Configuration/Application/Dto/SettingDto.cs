@@ -1,9 +1,8 @@
-﻿namespace Buddy.Configuration.Application.Dto
-{
-    public class SettingDto
-    {
-        public string Name { get; set; }
+﻿namespace Buddy.Configuration.Application.Dto;
 
-        public string Value { get; set; }
-    }
+public class SettingDto
+{
+    public string Name { get; set; }
+
+    public string Value { get; set; }
 }

@@ -1,6 +1,5 @@
-namespace Buddy.Localization
+namespace Buddy.Localization;
+
+public interface ILocalizedEnum
 {
-    public interface ILocalizedEnum
-    {
-    }
 }

@@ -1,9 +1,8 @@
 ﻿using Buddy.Localization.Application.Dto;
 
-namespace Buddy.Localization.Application
+namespace Buddy.Localization.Application;
+
+public interface ILanguageAppService
 {
-    public interface ILanguageAppService
-    {
-        LanguageDto Get();
-    }
+    LanguageDto Get();
 }

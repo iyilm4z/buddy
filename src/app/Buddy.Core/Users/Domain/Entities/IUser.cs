@@ -1,11 +1,10 @@
-﻿namespace Buddy.Users.Domain.Entities
+﻿namespace Buddy.Users.Domain.Entities;
+
+public interface IUser
 {
-    public interface IUser
-    {
-        public static string UserTableName => "User";
+    public static string UserTableName => "User";
 
-        string Username { get; set; }
+    string Username { get; set; }
 
-        string Email { get; set; }
-    }
+    string Email { get; set; }
 }

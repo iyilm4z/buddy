@@ -1,9 +1,8 @@
 ﻿using Buddy.Logging.Application.Dto;
 
-namespace Buddy.Logging.Application
+namespace Buddy.Logging.Application;
+
+public interface ILogAppService
 {
-    public interface ILogAppService
-    {
-        LogDto Get();
-    }
+    LogDto Get();
 }

@@ -2,20 +2,19 @@
 using Buddy.Localization.Application.Dto;
 using Buddy.Web.Mvc;
 
-namespace Buddy.Web.Controllers
+namespace Buddy.Web.Controllers;
+
+public class LanguageController : BuddyControllerBase, ILanguageAppService
 {
-    public class LanguageController : BuddyControllerBase, ILanguageAppService
+    private readonly ILanguageAppService _languageAppService;
+
+    public LanguageController(ILanguageAppService languageAppService)
     {
-        private readonly ILanguageAppService _languageAppService;
+        _languageAppService = languageAppService;
+    }
 
-        public LanguageController(ILanguageAppService languageAppService)
-        {
-            _languageAppService = languageAppService;
-        }
-
-        public LanguageDto Get()
-        {
-            return _languageAppService.Get();
-        }
+    public LanguageDto Get()
+    {
+        return _languageAppService.Get();
     }
 }

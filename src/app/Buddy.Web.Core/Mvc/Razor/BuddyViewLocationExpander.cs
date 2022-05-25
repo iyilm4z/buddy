@@ -8,22 +8,21 @@ using Microsoft.AspNetCore.Mvc.Razor;
 [assembly: AspMvcViewLocationFormat("/Web/Pages/{1}/{0}.cshtml")]
 [assembly: AspMvcViewLocationFormat("/Web/Pages/Shared/{0}.cshtml")]
 
-namespace Buddy.Web.Mvc.Razor
-{
-    public class BuddyViewLocationExpander : IViewLocationExpander
-    {
-        public void PopulateValues(ViewLocationExpanderContext context)
-        {
-        }
+namespace Buddy.Web.Mvc.Razor;
 
-        public IEnumerable<string> ExpandViewLocations(ViewLocationExpanderContext context,
-            IEnumerable<string> viewLocations)
+public class BuddyViewLocationExpander : IViewLocationExpander
+{
+    public void PopulateValues(ViewLocationExpanderContext context)
+    {
+    }
+
+    public IEnumerable<string> ExpandViewLocations(ViewLocationExpanderContext context,
+        IEnumerable<string> viewLocations)
+    {
+        return new[]
         {
-            return new[]
-            {
-                "/Web/Views/{1}/{0}.cshtml",
-                "/Web/Views/Shared/{0}.cshtml"
-            }.Concat(viewLocations);
-        }
+            "/Web/Views/{1}/{0}.cshtml",
+            "/Web/Views/Shared/{0}.cshtml"
+        }.Concat(viewLocations);
     }
 }

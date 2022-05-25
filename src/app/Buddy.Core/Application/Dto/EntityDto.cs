@@ -1,10 +1,9 @@
 ﻿using System;
 
-namespace Buddy.Application.Dto
+namespace Buddy.Application.Dto;
+
+[Serializable]
+public class EntityDto
 {
-    [Serializable]
-    public class EntityDto
-    {
-        public int Id { get; set; }
-    }
+    public int Id { get; set; }
 }

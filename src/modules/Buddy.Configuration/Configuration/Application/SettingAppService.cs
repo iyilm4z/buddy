@@ -1,13 +1,12 @@
 ﻿using Buddy.Application;
 using Buddy.Configuration.Application.Dto;
 
-namespace Buddy.Configuration.Application
+namespace Buddy.Configuration.Application;
+
+public class SettingAppService : ApplicationService, ISettingAppService
 {
-    public class SettingAppService : ApplicationService, ISettingAppService
+    public SettingDto Get()
     {
-        public SettingDto Get()
-        {
-            throw new System.NotImplementedException();
-        }
+        throw new System.NotImplementedException();
     }
 }

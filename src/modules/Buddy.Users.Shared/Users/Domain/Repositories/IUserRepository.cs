@@ -1,9 +1,8 @@
 ﻿using Buddy.Domain.Repositories;
 using Buddy.Users.Domain.Entities;
 
-namespace Buddy.Users.Domain.Repositories
+namespace Buddy.Users.Domain.Repositories;
+
+public interface IUserRepository : IRepository<User>
 {
-    public interface IUserRepository : IRepository<User>
-    {
-    }
 }

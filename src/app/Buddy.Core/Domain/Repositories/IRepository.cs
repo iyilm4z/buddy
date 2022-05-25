@@ -4,54 +4,53 @@ using System.Linq;
 using System.Linq.Expressions;
 using Buddy.Domain.Entities;
 
-namespace Buddy.Domain.Repositories
+namespace Buddy.Domain.Repositories;
+
+public interface IRepository<TEntity> where TEntity : Entity
 {
-    public interface IRepository<TEntity> where TEntity : Entity
-    {
-        #region Insert
+    #region Insert
 
-        void Insert(TEntity entity);
+    void Insert(TEntity entity);
 
-        #endregion
+    #endregion
 
-        #region Update
+    #region Update
 
-        void Update(TEntity entity);
+    void Update(TEntity entity);
 
-        #endregion
+    #endregion
 
-        #region Select
+    #region Select
 
-        IQueryable<TEntity> GetAll();
+    IQueryable<TEntity> GetAll();
 
-        List<TEntity> GetAllList();
+    List<TEntity> GetAllList();
 
-        List<TEntity> GetAllList(Expression<Func<TEntity, bool>> predicate);
+    List<TEntity> GetAllList(Expression<Func<TEntity, bool>> predicate);
 
-        TEntity Get(int id);
+    TEntity Get(int id);
 
-        TEntity FirstOrDefault(int id);
+    TEntity FirstOrDefault(int id);
 
-        TEntity FirstOrDefault(Expression<Func<TEntity, bool>> predicate);
+    TEntity FirstOrDefault(Expression<Func<TEntity, bool>> predicate);
 
-        #endregion
+    #endregion
 
-        #region Delete
+    #region Delete
 
-        void Delete(int id);
+    void Delete(int id);
 
-        void Delete(TEntity entity);
+    void Delete(TEntity entity);
 
-        void Delete(Expression<Func<TEntity, bool>> predicate);
+    void Delete(Expression<Func<TEntity, bool>> predicate);
 
-        #endregion
+    #endregion
 
-        #region Aggregates
+    #region Aggregates
 
-        int Count();
+    int Count();
 
-        int Count(Expression<Func<TEntity, bool>> predicate);
+    int Count(Expression<Func<TEntity, bool>> predicate);
 
-        #endregion
-    }
+    #endregion
 }

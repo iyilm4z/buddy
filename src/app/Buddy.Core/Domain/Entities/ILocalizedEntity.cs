@@ -1,6 +1,5 @@
-namespace Buddy.Domain.Entities
+namespace Buddy.Domain.Entities;
+
+public interface ILocalizedEntity
 {
-    public interface ILocalizedEntity
-    {
-    }
 }

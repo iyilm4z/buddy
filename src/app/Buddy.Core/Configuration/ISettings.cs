@@ -1,6 +1,5 @@
-﻿namespace Buddy.Configuration
+﻿namespace Buddy.Configuration;
+
+public interface ISettings
 {
-    public interface ISettings
-    {
-    }
 }

@@ -1,15 +1,14 @@
-﻿namespace Buddy.Logging.Domain.Entities
+﻿namespace Buddy.Logging.Domain.Entities;
+
+public enum LogLevel
 {
-    public enum LogLevel
-    {
-        Debug = 10,
+    Debug = 10,
 
-        Information = 20,
+    Information = 20,
 
-        Warning = 30,
+    Warning = 30,
 
-        Error = 40,
+    Error = 40,
 
-        Fatal = 50
-    }
+    Fatal = 50
 }

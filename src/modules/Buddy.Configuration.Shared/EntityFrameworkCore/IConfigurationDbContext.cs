@@ -1,10 +1,9 @@
 ﻿using Buddy.Configuration.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Buddy.EntityFrameworkCore
+namespace Buddy.EntityFrameworkCore;
+
+public interface IConfigurationDbContext
 {
-    public interface IConfigurationDbContext
-    {
-        DbSet<Setting> Settings { get; set; }
-    }
+    DbSet<Setting> Settings { get; set; }
 }

@@ -1,8 +1,7 @@
 ﻿using Buddy.Domain.Services;
 
-namespace Buddy.Users.Domain.Services
+namespace Buddy.Users.Domain.Services;
+
+public class UserDomainService : DomainService, IUserDomainService
 {
-    public class UserDomainService : DomainService, IUserDomainService
-    {
-    }
 }
