@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace Buddy.Core.Tests;
+namespace Buddy;
 
 public class UnitTest1
 {

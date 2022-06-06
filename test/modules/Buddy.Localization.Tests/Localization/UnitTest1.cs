@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace Buddy.Localization.Tests;
+namespace Buddy.Localization;
 
 public class UnitTest1
 {
