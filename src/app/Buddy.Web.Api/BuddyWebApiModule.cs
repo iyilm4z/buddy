@@ -38,7 +38,8 @@ public class BuddyWebApiModule : BuddyModule
 
         services.AddDatabaseDeveloperPageExceptionFilter();
 
-        services.AddControllers();
+        services.AddMvc();
+        services.AddSwaggerGen();
 
         services.ConfigureBuddyModuleRazorRuntimeCompilation(env);
 
@@ -57,6 +58,8 @@ public class BuddyWebApiModule : BuddyModule
         if (env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
+            app.UseSwagger();
+            app.UseSwaggerUI();
         }
         else
         {
@@ -71,6 +74,7 @@ public class BuddyWebApiModule : BuddyModule
 
         app.UseEndpoints(endpoints =>
         {
+            endpoints.MapDefaultControllerRoute();
             endpoints.MapControllers();
         });
     }

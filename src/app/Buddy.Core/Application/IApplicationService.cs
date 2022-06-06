@@ -1,5 +1,7 @@
-﻿namespace Buddy.Application;
+﻿using Buddy.Dependency;
 
-public interface IApplicationService
+namespace Buddy.Application;
+
+public interface IApplicationService : ITransientDependency
 {
 }
