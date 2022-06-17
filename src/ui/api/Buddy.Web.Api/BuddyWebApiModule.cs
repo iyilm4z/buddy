@@ -1,8 +1,15 @@
+using Buddy.Configuration;
 using Buddy.EntityFrameworkCore;
+using Buddy.Localization;
+using Buddy.Logging;
 using Buddy.Modularity;
-using Buddy.Web.Mvc;
+using Buddy.MultiTenancy;
+using Buddy.Users;
+using Buddy.Web.Mvc.Razor;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,9 +18,14 @@ using Microsoft.Extensions.Hosting;
 namespace Buddy.Web;
 
 [DependsOn(
-    typeof(BuddyWebMvcLocalizationModule)
+    typeof(BuddyWebApiCoreModule),
+    typeof(BuddyConfigurationModule),
+    typeof(BuddyLocalizationModule),
+    typeof(BuddyLoggingModule),
+    typeof(BuddyMultiTenancyModule),
+    typeof(BuddyUsersModule)
 )]
-public class BuddyWebMvcModule : BuddyModule
+public class BuddyWebApiModule : BuddyModule
 {
     public override void ConfigureServices(IServiceCollection services)
     {
@@ -27,17 +39,17 @@ public class BuddyWebMvcModule : BuddyModule
 
         services.AddDatabaseDeveloperPageExceptionFilter();
 
-        services.AddMvc()
-            .AddRazorRuntimeCompilation();
+        services.AddMvc();
+        services.AddSwaggerGen();
 
         services.ConfigureBuddyModuleRazorRuntimeCompilation(env);
 
-        // services.Configure<RazorViewEngineOptions>(options =>
-        // {
-        //     options.ViewLocationExpanders.Add(new BuddyViewLocationExpander());
-        // });
+        services.Configure<RazorViewEngineOptions>(options =>
+        {
+            options.ViewLocationExpanders.Add(new BuddyViewLocationExpander());
+        });
 
-        //services.Configure<RazorPagesOptions>(options => { options.RootDirectory = "/Web/Pages"; });
+        services.Configure<RazorPagesOptions>(options => { options.RootDirectory = "/Web/Pages"; });
     }
 
     public override void Configure(IApplicationBuilder app)
@@ -47,6 +59,8 @@ public class BuddyWebMvcModule : BuddyModule
         if (env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
+            app.UseSwagger();
+            app.UseSwaggerUI();
         }
         else
         {
@@ -62,7 +76,7 @@ public class BuddyWebMvcModule : BuddyModule
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapDefaultControllerRoute();
-            endpoints.MapRazorPages();
+            endpoints.MapControllers();
         });
     }
 }
