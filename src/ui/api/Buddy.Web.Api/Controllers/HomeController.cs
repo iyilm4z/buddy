@@ -1,9 +1,9 @@
-﻿using Buddy.Web.Mvc;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Buddy.Web.Controllers;
 
-public class HomeController : BuddyController
+// TODO: BUse base controller
+public class HomeController : Controller
 {
     public ActionResult Index() => Redirect("~/swagger");
 }

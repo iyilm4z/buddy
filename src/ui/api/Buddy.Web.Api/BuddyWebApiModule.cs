@@ -5,11 +5,8 @@ using Buddy.Logging;
 using Buddy.Modularity;
 using Buddy.MultiTenancy;
 using Buddy.Users;
-using Buddy.Web.Mvc.Razor;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -41,15 +38,6 @@ public class BuddyWebApiModule : BuddyModule
 
         services.AddMvc();
         services.AddSwaggerGen();
-
-        services.ConfigureBuddyModuleRazorRuntimeCompilation(env);
-
-        services.Configure<RazorViewEngineOptions>(options =>
-        {
-            options.ViewLocationExpanders.Add(new BuddyViewLocationExpander());
-        });
-
-        services.Configure<RazorPagesOptions>(options => { options.RootDirectory = "/Web/Pages"; });
     }
 
     public override void Configure(IApplicationBuilder app)

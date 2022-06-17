@@ -20,7 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\..\src\app\Buddy.Core\Buddy.Core.csproj" />
+        <ProjectReference Include="..\..\..\src\core\Buddy.Core\Buddy.Core.csproj" />
     </ItemGroup>
 
 </Project>

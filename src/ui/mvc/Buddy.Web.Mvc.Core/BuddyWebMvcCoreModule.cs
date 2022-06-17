@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Buddy.Web;
 
 [DependsOn(
-    typeof(BuddyWebCoreModule)
+    typeof(BuddyCoreModule)
 )]
 public class BuddyWebMvcCoreModule : BuddyModule
 {

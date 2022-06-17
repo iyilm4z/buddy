@@ -1,15 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
         <RootNamespace>Buddy.Web</RootNamespace>
-        <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
         <OutputType>Library</OutputType>
-        <StaticWebAssetBasePath>/</StaticWebAssetBasePath>
     </PropertyGroup>
-
+    
     <ItemGroup>
-        <ProjectReference Include="..\..\..\app\Buddy.Web.Core\Buddy.Web.Core.csproj" />
+        <ProjectReference Include="..\..\..\core\Buddy.Core\Buddy.Core.csproj" />
     </ItemGroup>
 
 </Project>

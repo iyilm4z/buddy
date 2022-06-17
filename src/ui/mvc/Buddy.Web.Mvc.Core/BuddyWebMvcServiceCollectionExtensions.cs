@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Buddy.Web;
 
-public static class ServiceCollectionExtensions
+public static class BuddyWebMvcServiceCollectionExtensions
 {
     public static IServiceCollection ConfigureBuddyModuleRazorRuntimeCompilation(this IServiceCollection services,
         IWebHostEnvironment hostEnvironment)
