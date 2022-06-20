@@ -1,6 +1,10 @@
+using Buddy.Configuration;
 using Buddy.EntityFrameworkCore;
+using Buddy.Localization;
+using Buddy.Logging;
 using Buddy.Modularity;
-using Buddy.Web.Mvc;
+using Buddy.MultiTenancy;
+using Buddy.Users;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +15,12 @@ using Microsoft.Extensions.Hosting;
 namespace Buddy.Web;
 
 [DependsOn(
-    typeof(BuddyWebMvcLocalizationModule)
+    typeof(BuddyWebMvcCoreModule),
+    typeof(BuddyConfigurationModule),
+    typeof(BuddyLocalizationModule),
+    typeof(BuddyLoggingModule),
+    typeof(BuddyMultiTenancyModule),
+    typeof(BuddyUsersModule)
 )]
 public class BuddyWebMvcModule : BuddyModule
 {
