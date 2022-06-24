@@ -6,7 +6,6 @@ using Buddy.Dependency;
 using Buddy.Modularity;
 using Buddy.ObjectMapping;
 using Buddy.Reflection;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Buddy;
@@ -18,7 +17,7 @@ public class BuddyCoreModule : BuddyModule
         RegisterConventionalDependencies(services, Singleton<IAssemblyFinder>.Instance);
     }
 
-    public override void Configure(IApplicationBuilder app)
+    public override void Configure(IServiceProvider serviceProvider)
     {
         AddAutoMapper(Singleton<ITypeFinder>.Instance);
 

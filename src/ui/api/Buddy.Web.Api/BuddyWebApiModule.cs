@@ -1,3 +1,4 @@
+using System;
 using Buddy.Configuration;
 using Buddy.EntityFrameworkCore;
 using Buddy.Localization;
@@ -40,9 +41,10 @@ public class BuddyWebApiModule : BuddyModule
         services.AddSwaggerGen();
     }
 
-    public override void Configure(IApplicationBuilder app)
+    public override void Configure(IServiceProvider serviceProvider)
     {
-        var env = app.ApplicationServices.GetService<IWebHostEnvironment>();
+        var app = serviceProvider.GetRequiredApplicationBuilder();
+        var env = serviceProvider.GetRequiredWebHostEnvironment();
 
         if (env.IsDevelopment())
         {

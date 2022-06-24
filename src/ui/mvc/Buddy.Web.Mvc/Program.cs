@@ -1,5 +1,4 @@
 using Autofac.Extensions.DependencyInjection;
-using Buddy;
 using Buddy.Web;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -9,10 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Configuration.AddEnvironmentVariables();
 
-builder.Services.AddBuddy<BuddyWebMvcModule>();
+builder.Services.AddBuddyWeb<BuddyWebMvcModule>();
 
 var app = builder.Build();
 
-app.UseBuddy();
+app.UseBuddyWeb();
 
 app.Run();

@@ -5,9 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Buddy;
 
-public static class ServiceCollectionExtensions
+public static class BuddyCoreServiceCollectionExtensions
 {
-    public static IServiceCollection AddBuddy<TStartupModule>(this IServiceCollection services)
+    public static void AddBuddy<TStartupModule>(this IServiceCollection services)
         where TStartupModule : BuddyModule
     {
         var buddyApp = new BuddyApplication(typeof(TStartupModule), services);
@@ -17,8 +17,6 @@ public static class ServiceCollectionExtensions
         // force to keep these codes just before returning the services 
         var serviceLocator = BuddyServiceLocator.Create();
         services.AddSingleton(serviceLocator);
-
-        return services;
     }
 
     public static void AddCoreModuleServices(this IServiceCollection services,

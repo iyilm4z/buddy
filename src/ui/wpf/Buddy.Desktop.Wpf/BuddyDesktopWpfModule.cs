@@ -1,11 +1,11 @@
-﻿using Buddy.Configuration;
+﻿using System;
+using Buddy.Configuration;
 using Buddy.EntityFrameworkCore;
 using Buddy.Localization;
 using Buddy.Logging;
 using Buddy.Modularity;
 using Buddy.MultiTenancy;
 using Buddy.Users;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,7 +32,7 @@ public class BuddyDesktopWpfModule : BuddyModule
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
     }
 
-    public override void Configure(IApplicationBuilder app)
+    public override void Configure(IServiceProvider serviceProvider)
     {
     }
 }

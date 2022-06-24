@@ -9,11 +9,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\core\Buddy.Core\Buddy.Core.csproj" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.3"/>
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.3" />
+        <ProjectReference Include="..\..\..\core\Buddy.Web.Core\Buddy.Web.Core.csproj"/>
     </ItemGroup>
 
 </Project>

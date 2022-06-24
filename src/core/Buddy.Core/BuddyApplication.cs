@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Buddy.Modularity;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Buddy;
@@ -33,11 +32,11 @@ public class BuddyApplication : IBuddyModuleContainer
         }
     }
 
-    public void InitModules(IApplicationBuilder app)
+    public void InitModules(IServiceProvider serviceProvider)
     {
         foreach (var module in Modules)
         {
-            module.Instance.Configure(app);
+            module.Instance.Configure(serviceProvider);
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Reflection;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Buddy.Modularity;
@@ -11,11 +10,11 @@ public abstract class BuddyModule
     {
     }
 
-    public virtual void Configure(IApplicationBuilder app)
+    public virtual void Configure(IServiceProvider serviceProvider)
     {
     }
 
-    public static bool IsIyModule(Type type)
+    public static bool IsBuddyModule(Type type)
     {
         var typeInfo = type.GetTypeInfo();
         return

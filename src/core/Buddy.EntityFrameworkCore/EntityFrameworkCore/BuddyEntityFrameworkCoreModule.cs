@@ -1,10 +1,10 @@
-﻿using Buddy.Configuration;
+﻿using System;
+using Buddy.Configuration;
 using Buddy.Localization;
 using Buddy.Logging;
 using Buddy.Modularity;
 using Buddy.MultiTenancy;
 using Buddy.Users;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Buddy.EntityFrameworkCore;
@@ -22,7 +22,7 @@ public class BuddyEntityFrameworkCoreModule : BuddyModule
     {
     }
 
-    public override void Configure(IApplicationBuilder app)
+    public override void Configure(IServiceProvider serviceProvider)
     {
     }
 }

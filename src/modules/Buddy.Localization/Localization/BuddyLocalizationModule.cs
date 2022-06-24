@@ -1,6 +1,6 @@
-﻿using Buddy.EntityFrameworkCore;
+﻿using System;
+using Buddy.EntityFrameworkCore;
 using Buddy.Modularity;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Buddy.Localization;
@@ -14,7 +14,7 @@ public class BuddyLocalizationModule : BuddyModule
     {
     }
 
-    public override void Configure(IApplicationBuilder app)
+    public override void Configure(IServiceProvider serviceProvider)
     {
     }
 }

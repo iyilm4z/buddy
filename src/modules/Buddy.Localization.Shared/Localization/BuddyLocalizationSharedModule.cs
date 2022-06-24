@@ -1,5 +1,5 @@
-﻿using Buddy.Modularity;
-using Microsoft.AspNetCore.Builder;
+﻿using System;
+using Buddy.Modularity;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Buddy.Localization;
@@ -13,7 +13,7 @@ public class BuddyLocalizationSharedModule : BuddyModule
     {
     }
 
-    public override void Configure(IApplicationBuilder app)
+    public override void Configure(IServiceProvider serviceProvider)
     {
     }
 }

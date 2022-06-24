@@ -1,13 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
-        <RootNamespace>Buddy.Web</RootNamespace>
+        <RootNamespace>Buddy</RootNamespace>
         <OutputType>Library</OutputType>
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\..\core\Buddy.Web.Core\Buddy.Web.Core.csproj"/>
+      <ProjectReference Include="..\Buddy.Core\Buddy.Core.csproj" />
     </ItemGroup>
 
 </Project>

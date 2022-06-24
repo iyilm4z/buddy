@@ -21,7 +21,7 @@ internal static class BuddyModuleHelper
 
     public static List<Type> FindDependedModuleTypes(Type moduleType)
     {
-        if (!BuddyModule.IsIyModule(moduleType))
+        if (!BuddyModule.IsBuddyModule(moduleType))
         {
             throw new ArgumentNullException(nameof(moduleType));
         }
@@ -45,7 +45,7 @@ internal static class BuddyModuleHelper
 
     private static void AddModuleAndDependenciesRecursively(List<Type> moduleTypes, Type moduleType)
     {
-        if (!BuddyModule.IsIyModule(moduleType))
+        if (!BuddyModule.IsBuddyModule(moduleType))
         {
             throw new ArgumentNullException(nameof(moduleType));
         }

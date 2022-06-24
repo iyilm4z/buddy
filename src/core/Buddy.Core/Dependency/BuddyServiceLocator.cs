@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Buddy.Dependency;
@@ -22,10 +21,13 @@ public class BuddyServiceLocator : IServiceLocator
             return scope.ServiceProvider;
         }
 
-        var accessor = _serviceProvider?.GetService<IHttpContextAccessor>();
-        var context = accessor?.HttpContext;
+        //Todo check this for webapps
+        // var accessor = _serviceProvider?.GetService<IHttpContextAccessor>();
+        // var context = accessor?.HttpContext;
+        //
+        // return context?.RequestServices ?? _serviceProvider;
 
-        return context?.RequestServices ?? _serviceProvider;
+        return _serviceProvider;
     }
 
     public static IServiceLocator Instance
