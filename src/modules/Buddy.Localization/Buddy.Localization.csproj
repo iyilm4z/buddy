@@ -6,7 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\core\Buddy.EntityFrameworkCore\Buddy.EntityFrameworkCore.csproj" />
+        <ProjectReference Include="..\..\core\Buddy.EntityFrameworkCore\Buddy.EntityFrameworkCore.csproj"/>
     </ItemGroup>
 
 </Project>

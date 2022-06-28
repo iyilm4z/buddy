@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using Buddy.Web.Models;
+using Buddy.Web.Areas.Localization.Models;
 using Buddy.Web.Mvc.RazorPages;
 
-namespace Buddy.Web.Pages.Language;
+namespace Buddy.Web.Areas.Localization.Pages.Language;
 
 public class IndexModel : BuddyPageModelBase
 {

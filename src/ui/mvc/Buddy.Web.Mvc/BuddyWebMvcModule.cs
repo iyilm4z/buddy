@@ -58,10 +58,13 @@ public class BuddyWebMvcModule : BuddyModule
         app.UseRouting();
 
         app.UseAuthorization();
-
+        
         app.UseEndpoints(endpoints =>
         {
-            endpoints.MapDefaultControllerRoute();
+            endpoints.MapControllerRoute(
+                name : "areas",
+                pattern : "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+            );
             endpoints.MapRazorPages();
         });
     }

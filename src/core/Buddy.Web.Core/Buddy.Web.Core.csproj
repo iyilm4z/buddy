@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Buddy.Core\Buddy.Core.csproj" />
+        <ProjectReference Include="..\Buddy.Core\Buddy.Core.csproj"/>
     </ItemGroup>
 
 </Project>

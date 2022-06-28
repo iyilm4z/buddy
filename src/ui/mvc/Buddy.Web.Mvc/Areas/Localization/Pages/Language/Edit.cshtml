@@ -1,17 +1,17 @@
 @page
-@model CreateModel
+@model EditModel
 @{
     Layout = "Layout/_Layout.Localization";
-    ViewBag.PageTitle = "Languages.AddNew";
+    ViewBag.PageTitle = "Languages.EditLanguageDetails";
 }
 
-<form action="/Language/Create" method="post">
+<form action="/Localization/Language/Edit" method="post">
     <div class="content-header clearfix">
         <h1 class="float-left">
-            Languages.AddNew
+            Languages.EditLanguageDetails - @Model.Language.Name
             <small>
                 <i class="fas fa-arrow-circle-left"></i>
-                <a href="/Language/Index">Languages.BackToList</a>
+                <a href="/Localization/Language/Index">Languages.BackToList</a>
             </small>
         </h1>
         <div class="float-right">
@@ -19,6 +19,10 @@
                 <i class="far fa-save"></i>
                 Common.Save
             </button>
+            <span id="language-delete" class="btn btn-danger">
+                <i class="far fa-trash-alt"></i>
+                Common.Delete
+            </span>
         </div>
     </div>
     @await Html.PartialAsync("_CreateOrUpdate", Model.Language)

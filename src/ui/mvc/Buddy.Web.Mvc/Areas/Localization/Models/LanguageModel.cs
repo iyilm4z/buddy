@@ -1,4 +1,4 @@
-﻿namespace Buddy.Web.Models;
+﻿namespace Buddy.Web.Areas.Localization.Models;
 
 public class LanguageModel
 {

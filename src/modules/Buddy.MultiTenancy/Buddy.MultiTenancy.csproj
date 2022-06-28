@@ -4,9 +4,9 @@
         <TargetFramework>net6.0</TargetFramework>
         <RootNamespace>Buddy</RootNamespace>
     </PropertyGroup>
-    
+
     <ItemGroup>
-        <ProjectReference Include="..\..\core\Buddy.EntityFrameworkCore\Buddy.EntityFrameworkCore.csproj" />
+        <ProjectReference Include="..\..\core\Buddy.EntityFrameworkCore\Buddy.EntityFrameworkCore.csproj"/>
     </ItemGroup>
 
 </Project>
