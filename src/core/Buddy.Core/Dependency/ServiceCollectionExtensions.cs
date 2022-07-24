@@ -1,4 +1,6 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Linq;
+using System.Reflection;
 using Buddy.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -16,10 +18,7 @@ public static class ServiceCollectionExtensions
 
                 assignedType
                     .GetDefaultInterfaces()
-                    .ForEach(defaultInterface =>
-                    {
-                        services.AddTransient(defaultInterface, assignedType);
-                    });
+                    .ForEach(defaultInterface => { services.AddTransient(defaultInterface, assignedType); });
             });
 
         typeof(ISingletonDependency)
@@ -30,10 +29,7 @@ public static class ServiceCollectionExtensions
 
                 assignedType
                     .GetDefaultInterfaces()
-                    .ForEach(defaultInterface =>
-                    {
-                        services.AddSingleton(defaultInterface, assignedType);
-                    });
+                    .ForEach(defaultInterface => { services.AddSingleton(defaultInterface, assignedType); });
             });
 
         typeof(IScopedDependency)
@@ -44,10 +40,35 @@ public static class ServiceCollectionExtensions
 
                 assignedType
                     .GetDefaultInterfaces()
-                    .ForEach(defaultInterface =>
-                    {
-                        services.AddScoped(defaultInterface, assignedType);
-                    });
+                    .ForEach(defaultInterface => { services.AddScoped(defaultInterface, assignedType); });
             });
+    }
+
+    public static T GetSingletonInstanceOrNull<T>(this IServiceCollection services)
+    {
+        return (T)services
+            .FirstOrDefault(d => d.ServiceType == typeof(T))
+            ?.ImplementationInstance;
+    }
+
+    public static T GetSingletonInstance<T>(this IServiceCollection services)
+    {
+        var service = services.GetSingletonInstanceOrNull<T>();
+        if (service == null)
+        {
+            throw new InvalidOperationException("Could not find singleton service: " + typeof(T).AssemblyQualifiedName);
+        }
+
+        return service;
+    }
+
+    public static IAssemblyFinder GetAssemblyFinder(this IServiceCollection services)
+    {
+        return services.GetSingletonInstance<IAssemblyFinder>();
+    }
+
+    public static ITypeFinder GetTypeFinder(this IServiceCollection services)
+    {
+        return services.GetSingletonInstance<ITypeFinder>();
     }
 }

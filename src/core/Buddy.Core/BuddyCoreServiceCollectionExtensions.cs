@@ -12,11 +12,6 @@ public static class BuddyCoreServiceCollectionExtensions
     {
         var buddyApp = new BuddyApplication(typeof(TStartupModule), services);
         buddyApp.LoadModules();
-
-        // create and register the service locator
-        // force to keep these codes just before returning the services 
-        var serviceLocator = BuddyServiceLocator.Create();
-        services.AddSingleton(serviceLocator);
     }
 
     public static void AddCoreModuleServices(this IServiceCollection services,
@@ -24,12 +19,19 @@ public static class BuddyCoreServiceCollectionExtensions
     {
         // register assembly provider
         var assemblyProvider = new BuddyAssemblyFinder(moduleContainer);
-        Singleton<IAssemblyFinder>.Instance = assemblyProvider;
         services.AddSingleton<IAssemblyFinder>(assemblyProvider);
 
         // register type finder
         var typeFinder = new BuddyTypeFinder(assemblyProvider);
-        Singleton<ITypeFinder>.Instance = typeFinder;
         services.AddSingleton<ITypeFinder>(typeFinder);
+    }
+
+    public static void RegisterConventionalDependencies(this IServiceCollection services)
+    {
+        var assemblyFinder = services.GetAssemblyFinder();
+        foreach (var assembly in assemblyFinder.GetAllAssemblies())
+        {
+            services.RegisterConventionalDependencyInjection(assembly);
+        }
     }
 }
