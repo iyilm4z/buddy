@@ -13,7 +13,7 @@
 
     <link rel="icon" type="image/png" href="~/img/buddy-favicon.ico" />
 
-    @await Html.PartialAsync("_Styles.cshtml")
+    @await Html.PartialAsync("_Admin.Styles.cshtml")
     @await RenderSectionAsync("Styles", false)
 </head>
 <body class="hold-transition sidebar-mini">
@@ -26,7 +26,7 @@
         @(await Component.InvokeAsync<ControlSidebarViewComponent>())
         @(await Component.InvokeAsync<FooterViewComponent>())
     </div>
-    @await Html.PartialAsync("_Scripts.cshtml")
+    @await Html.PartialAsync("_Admin.Scripts.cshtml")
     @await RenderSectionAsync("Scripts", false)
 </body>
 </html>

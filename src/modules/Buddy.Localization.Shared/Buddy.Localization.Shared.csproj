@@ -6,6 +6,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.6"/>
+    </ItemGroup>
+
+    <ItemGroup>
         <ProjectReference Include="..\..\core\Buddy.Core\Buddy.Core.csproj"/>
     </ItemGroup>
 
