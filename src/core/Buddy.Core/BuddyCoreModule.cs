@@ -14,6 +14,5 @@ public class BuddyCoreModule : BuddyModule
     public override void Configure(IServiceProvider serviceProvider)
     {
         serviceProvider.AddAutoMapper();
-        serviceProvider.RunStartupTasks();
     }
 }

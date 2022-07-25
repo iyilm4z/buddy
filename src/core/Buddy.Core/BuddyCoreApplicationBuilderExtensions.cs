@@ -35,19 +35,4 @@ public static class BuddyCoreApplicationBuilderExtensions
 
         AutoMapperConfiguration.Init(config);
     }
-
-    public static void RunStartupTasks(this IServiceProvider serviceProvider)
-    {
-        var typeFinder = serviceProvider.GetTypeFinder();
-        var startupTasks = typeFinder.FindClassesOfType<IStartupTask>();
-
-        var instances = startupTasks
-            .Select(startupTask => (IStartupTask)Activator.CreateInstance(startupTask))
-            .OrderBy(startupTask => startupTask.Order);
-
-        foreach (var task in instances)
-        {
-            task.Execute();
-        }
-    }
 }
