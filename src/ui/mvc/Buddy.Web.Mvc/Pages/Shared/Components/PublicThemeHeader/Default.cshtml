@@ -70,7 +70,7 @@
             @if (User.Identity.IsAuthenticated)
             {
                 <li class="nav-item">
-                    <a class="nav-link btn btn-dark" href="/Admin">
+                    <a class="nav-link btn btn-dark" asp-area="Admin" asp- asp-page="/Index">
                         <i class="fas fa-wrench"></i>
                         Go to Admin Panel
                     </a>
@@ -86,7 +86,7 @@
                     </a>
                     <ul aria-labelledby="authenticatedDropdownSubMenu" class="dropdown-menu border-0 shadow">
                         <li>
-                            <a class="dropdown-item" href="/Account/Logout">
+                            <a class="dropdown-item" asp-page="/Index" asp-page-handler="Logout">
                                 <i class="fas fa-arrow-circle-right"></i>
                                 Log out
                             </a>
