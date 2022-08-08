@@ -6,21 +6,72 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.6"/>
+        <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.6" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.6">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.6"/>
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.6" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\..\modules\Buddy.Configuration\Buddy.Configuration.csproj"/>
-        <ProjectReference Include="..\..\..\modules\Buddy.Localization\Buddy.Localization.csproj"/>
-        <ProjectReference Include="..\..\..\modules\Buddy.Logging\Buddy.Logging.csproj"/>
-        <ProjectReference Include="..\..\..\modules\Buddy.MultiTenancy\Buddy.MultiTenancy.csproj"/>
-        <ProjectReference Include="..\..\..\modules\Buddy.Users\Buddy.Users.csproj"/>
-        <ProjectReference Include="..\Buddy.Web.Mvc.Core\Buddy.Web.Mvc.Core.csproj"/>
+        <ProjectReference Include="..\..\..\modules\Buddy.Account.Shared\Buddy.Account.Shared.csproj" />
+        <ProjectReference Include="..\..\..\modules\Buddy.Configuration\Buddy.Configuration.csproj" />
+        <ProjectReference Include="..\..\..\modules\Buddy.Localization\Buddy.Localization.csproj" />
+        <ProjectReference Include="..\..\..\modules\Buddy.Logging\Buddy.Logging.csproj" />
+        <ProjectReference Include="..\..\..\modules\Buddy.MultiTenancy\Buddy.MultiTenancy.csproj" />
+        <ProjectReference Include="..\..\..\modules\Buddy.Users\Buddy.Users.csproj" />
+        <ProjectReference Include="..\Buddy.Web.Mvc.Core\Buddy.Web.Mvc.Core.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Areas\Admin\Pages\Shared\Components\Footer\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Pages\Shared\Components\FooterLeft\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Pages\Shared\Components\FooterRight\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Pages\Shared\Components\Header\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Pages\Shared\Components\HeaderLeft\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Pages\Shared\Components\HeaderMessagesMenu\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Pages\Shared\Components\HeaderNotificationsMenu\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Pages\Shared\Components\HeaderRight\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Pages\Shared\Components\HeaderSearchForm\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Pages\Shared\Components\Sidebar\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Pages\Shared\Components\SidebarBrand\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Pages\Shared\Components\SidebarMenu\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Pages\Shared\Components\SidebarUserPanel\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Pages\Shared\Components\AdminLte\ControlSidebar\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Pages\Shared\Components\AdminLte\Footer\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Pages\Shared\Components\AdminLte\FooterLeft\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Pages\Shared\Components\AdminLte\FooterRight\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Pages\Shared\Components\AdminLte\Header\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Pages\Shared\Components\AdminLte\HeaderLeft\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Pages\Shared\Components\AdminLte\HeaderMessagesMenu\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Pages\Shared\Components\AdminLte\HeaderNotificationsMenu\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Pages\Shared\Components\AdminLte\HeaderRight\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Pages\Shared\Components\AdminLte\HeaderSearchForm\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Pages\Shared\Components\AdminLte\Sidebar\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Pages\Shared\Components\AdminLte\SidebarBrand\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Pages\Shared\Components\AdminLte\SidebarMenu\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Pages\Shared\Components\AdminLte\SidebarUserPanel\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\Components\Sidebar\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\Components\SidebarBrand\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\Components\SidebarMenu\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\Components\SidebarUserPanel\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\Components\ControlSidebar\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\Components\Footer\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\Components\FooterLeft\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\Components\FooterRight\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\Components\Header\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\Components\HeaderLeft\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\Components\HeaderMessagesMenu\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\Components\HeaderNotificationsMenu\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\Components\HeaderRight\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\Components\HeaderSearchForm\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\Components\ThemeFooter\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\Components\ThemeFooterLeft\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\Components\ThemeFooterRight\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\Components\ThemeHeaderBrand\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\Components\ThemeHeaderLeft\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\Components\ThemeHeaderRight\Default.cshtml" />
     </ItemGroup>
 
 </Project>

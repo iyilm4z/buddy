@@ -1,0 +1,28 @@
+﻿@using Buddy.Web.Pages.Shared.Components.PublicThemeFooter
+@using Buddy.Web.Pages.Shared.Components.PublicThemeHeader
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Buddy | @ViewBag.PageTitle</title>
+
+    <link rel="icon" type="image/png" href="~/img/buddy-favicon.ico"/>
+
+    @await Html.PartialAsync("_PublicTheme.Styles.cshtml")
+    @await RenderSectionAsync("Styles", false)
+</head>
+<body class="hold-transition layout-top-nav">
+<div class="wrapper">
+    @(await Component.InvokeAsync<PublicThemeHeaderViewComponent>())
+    <div class="content-wrapper">
+        @RenderBody()
+    </div>
+    @(await Component.InvokeAsync<PublicThemeFooterViewComponent>())
+</div>
+@await Html.PartialAsync("_PublicTheme.Scripts.cshtml")
+@await RenderSectionAsync("Scripts", false)
+</body>
+</html>

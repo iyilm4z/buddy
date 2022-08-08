@@ -1,0 +1,25 @@
+@page
+@model Buddy.Web.Areas.Admin.Pages.Language.CreateModel
+@{
+    Layout = "Layout/_Localization.Layout";
+    ViewBag.PageTitle = "Languages.AddNew";
+}
+
+<form action="/Admin/Language/Create" method="post">
+    <div class="content-header clearfix">
+        <h1 class="float-left">
+            Languages.AddNew
+            <small>
+                <i class="fas fa-arrow-circle-left"></i>
+                <a href="/Admin/Language/Index">Languages.BackToList</a>
+            </small>
+        </h1>
+        <div class="float-right">
+            <button type="submit" name="save" class="btn btn-primary">
+                <i class="far fa-save"></i>
+                Common.Save
+            </button>
+        </div>
+    </div>
+    @await Html.PartialAsync("_CreateOrUpdate", Model.Language)
+</form>

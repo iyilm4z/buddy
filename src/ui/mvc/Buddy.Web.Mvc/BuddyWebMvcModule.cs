@@ -6,6 +6,7 @@ using Buddy.Logging;
 using Buddy.Modularity;
 using Buddy.MultiTenancy;
 using Buddy.Users;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -35,8 +36,16 @@ public class BuddyWebMvcModule : BuddyModule
 
         services.AddDatabaseDeveloperPageExceptionFilter();
 
-        services.AddMvc()
+        services.AddControllersWithViews();
+
+        services.AddRazorPages(options =>
+            {
+                options.Conventions.AuthorizeAreaFolder("Localization", "/Language");
+            })
             .AddRazorRuntimeCompilation();
+
+        services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie();
     }
 
     public override void Configure(IServiceProvider serviceProvider)
@@ -57,13 +66,14 @@ public class BuddyWebMvcModule : BuddyModule
 
         app.UseRouting();
 
+        app.UseAuthentication();
         app.UseAuthorization();
-        
+
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllerRoute(
-                name : "areas",
-                pattern : "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                name: "areas",
+                pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
             );
             endpoints.MapRazorPages();
         });

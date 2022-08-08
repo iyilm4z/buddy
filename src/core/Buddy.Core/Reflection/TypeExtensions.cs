@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Buddy.Collections.Extensions;
 
 namespace Buddy.Reflection;
 
@@ -27,13 +28,8 @@ internal static class TypeExtensions
             .Where(type => @this.GetTypeInfo().IsAssignableFrom(type)
                            && type.GetTypeInfo().IsClass
                            && !type.GetTypeInfo().IsAbstract
-                           && !type.GetTypeInfo().IsSealed);
-
-        if (!includeNonGenericTypes)
-        {
-            assignedTypes = assignedTypes
-                .Where(type => !type.GetTypeInfo().IsGenericType);
-        }
+                           && !type.GetTypeInfo().IsSealed)
+            .WhereIf(!includeNonGenericTypes, type => !type.GetTypeInfo().IsGenericType);
 
         return assignedTypes.ToList();
     }

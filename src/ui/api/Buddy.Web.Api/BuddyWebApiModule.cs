@@ -6,6 +6,7 @@ using Buddy.Logging;
 using Buddy.Modularity;
 using Buddy.MultiTenancy;
 using Buddy.Users;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -39,6 +40,9 @@ public class BuddyWebApiModule : BuddyModule
 
         services.AddMvc();
         services.AddSwaggerGen();
+        
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer();
     }
 
     public override void Configure(IServiceProvider serviceProvider)
@@ -61,6 +65,7 @@ public class BuddyWebApiModule : BuddyModule
 
         app.UseRouting();
 
+        app.UseAuthentication();
         app.UseAuthorization();
 
         app.UseEndpoints(endpoints =>

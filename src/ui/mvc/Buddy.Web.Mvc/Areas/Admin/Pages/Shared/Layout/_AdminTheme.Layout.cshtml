@@ -1,0 +1,32 @@
+﻿@using Buddy.Web.Areas.Admin.Pages.Shared.Components.AdminThemeControlSidebar
+@using Buddy.Web.Areas.Admin.Pages.Shared.Components.AdminThemeFooter
+@using Buddy.Web.Areas.Admin.Pages.Shared.Components.AdminThemeHeader
+@using Buddy.Web.Areas.Admin.Pages.Shared.Components.AdminThemeSidebar
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Buddy | @ViewBag.PageTitle</title>
+
+    <link rel="icon" type="image/png" href="~/img/buddy-favicon.ico"/>
+
+    @await Html.PartialAsync("_AdminTheme.Styles.cshtml")
+    @await RenderSectionAsync("Styles", false)
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    @(await Component.InvokeAsync<AdminThemeHeaderViewComponent>())
+    @(await Component.InvokeAsync<AdminThemeSidebarViewComponent>())
+    <div class="content-wrapper">
+        @RenderBody()
+    </div>
+    @(await Component.InvokeAsync<AdminThemeControlSidebarViewComponent>())
+    @(await Component.InvokeAsync<AdminThemeFooterViewComponent>())
+</div>
+@await Html.PartialAsync("_AdminTheme.Scripts.cshtml")
+@await RenderSectionAsync("Scripts", false)
+</body>
+</html>
