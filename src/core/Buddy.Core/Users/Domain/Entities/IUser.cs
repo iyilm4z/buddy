@@ -2,7 +2,9 @@
 
 public interface IUser
 {
-    public static string UserTableName => "User";
+    public const string UserTableName = "User";
+
+    int Id { get; set; }
 
     string Username { get; set; }
 

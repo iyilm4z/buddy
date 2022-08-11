@@ -1,25 +1,19 @@
 ﻿using System;
-using Buddy.Configuration;
-using Buddy.Localization;
-using Buddy.Logging;
+using Buddy.Domain.Repositories;
 using Buddy.Modularity;
-using Buddy.MultiTenancy;
 using Buddy.Users;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Buddy.EntityFrameworkCore;
 
 [DependsOn(
-    typeof(BuddyConfigurationSharedModule),
-    typeof(BuddyLocalizationSharedModule),
-    typeof(BuddyLoggingSharedModule),
-    typeof(BuddyMultiTenancySharedModule),
     typeof(BuddyUsersSharedModule)
 )]
 public class BuddyEntityFrameworkCoreModule : BuddyModule
 {
     public override void ConfigureServices(IServiceCollection services)
     {
+        services.AddTransient(typeof(IRepository<>), typeof(EfCoreRepository<>));
     }
 
     public override void Configure(IServiceProvider serviceProvider)

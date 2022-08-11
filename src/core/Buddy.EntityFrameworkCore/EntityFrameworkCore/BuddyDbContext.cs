@@ -1,17 +1,9 @@
-﻿using Buddy.Configuration.Domain.Entities;
-using Buddy.Localization.Domain.Entities;
-using Buddy.Logging.Domain.Entities;
-using Buddy.MultiTenancy.Domain.Entities;
-using Buddy.Users.Domain.Entities;
+﻿using Buddy.Users.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Buddy.EntityFrameworkCore;
 
 public class BuddyDbContext : DbContext,
-    IConfigurationDbContext,
-    ILocalizationDbContext,
-    ILoggingDbContext,
-    IMultiTenancyDbContext,
     IUsersDbContext
 {
     public BuddyDbContext(DbContextOptions options) : base(options)
@@ -22,29 +14,8 @@ public class BuddyDbContext : DbContext,
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.ConfigureConfiguration<BuddyDbContext>();
-        modelBuilder.ConfigureLocalization<BuddyDbContext>();
-        modelBuilder.ConfigureLogging<BuddyDbContext, User>();
-        modelBuilder.ConfigureMultiTenancy<BuddyDbContext>();
         modelBuilder.ConfigureUsers<BuddyDbContext>();
     }
-
-    // Configuration
-    public DbSet<Setting> Settings { get; set; }
-
-    // Localization
-    public DbSet<Language> Languages { get; set; }
-    public DbSet<LocaleStringResource> LocaleStringResources { get; set; }
-    public DbSet<LocalizedProperty> LocalizedProperties { get; set; }
-
-    // Logging
-    public DbSet<Log> Logs { get; set; }
-    public DbSet<ActivityLog> ActivityLogs { get; set; }
-    public DbSet<ActivityLogType> ActivityLogTypes { get; set; }
-
-    // MultiTenancy
-    public DbSet<Tenant> Tenants { get; set; }
-    public DbSet<TenantMapping> TenantMappings { get; set; }
 
     // Users
     public DbSet<User> Users { get; set; }

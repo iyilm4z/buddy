@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
+using Buddy.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -8,13 +7,20 @@ namespace Buddy.Web.Pages;
 
 public class IndexModel : PageModel
 {
+    private readonly ICookieAuthenticationManager _cookieAuthenticationManager;
+    
+    public IndexModel(ICookieAuthenticationManager cookieAuthenticationManager)
+    {
+        _cookieAuthenticationManager = cookieAuthenticationManager;
+    }
+    
     public void OnGet()
     {
     }
 
     public async Task<IActionResult> OnGetLogoutAsync()
     {
-        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        await _cookieAuthenticationManager.SignOutAsync();
 
         return RedirectToPage("/Index");
     }

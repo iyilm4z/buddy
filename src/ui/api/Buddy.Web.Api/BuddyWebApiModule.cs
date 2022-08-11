@@ -1,10 +1,6 @@
 using System;
-using Buddy.Configuration;
 using Buddy.EntityFrameworkCore;
-using Buddy.Localization;
-using Buddy.Logging;
 using Buddy.Modularity;
-using Buddy.MultiTenancy;
 using Buddy.Users;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -18,10 +14,6 @@ namespace Buddy.Web;
 
 [DependsOn(
     typeof(BuddyWebApiCoreModule),
-    typeof(BuddyConfigurationModule),
-    typeof(BuddyLocalizationModule),
-    typeof(BuddyLoggingModule),
-    typeof(BuddyMultiTenancyModule),
     typeof(BuddyUsersModule)
 )]
 public class BuddyWebApiModule : BuddyModule

@@ -1,16 +1,25 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Security.Claims;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
+using Buddy.Authentication;
+using Buddy.Users.Domain.Entities;
+using Buddy.Users.Domain.Repositories;
 using Buddy.Web.Mvc.RazorPages;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Buddy.Web.Pages.Account;
 
-public class LoginPage : BuddyPageModelBase
+public class LoginModel : BuddyPageModelBase
 {
+    private readonly ICookieAuthenticationManager _cookieAuthenticationManager;
+    private readonly IUserRepository _userRepository;
+
+    public LoginModel(ICookieAuthenticationManager cookieAuthenticationManager, 
+        IUserRepository userRepository)
+    {
+        _cookieAuthenticationManager = cookieAuthenticationManager;
+        _userRepository = userRepository;
+    }
+
     [BindProperty] public LoginPageViewModel ViewModel { get; set; }
 
     public string ReturnUrl { get; private set; }
@@ -19,18 +28,18 @@ public class LoginPage : BuddyPageModelBase
 
     public class LoginPageViewModel
     {
-        [Required] [EmailAddress] public string UserNameOrEmailAddress { get; set; }
+        [Required] public string Username { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        public string RememberMe { get; set; }
+        public bool RememberMe { get; set; }
     }
 
     public async Task OnGetAsync(string returnUrl = null)
     {
-        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        await _cookieAuthenticationManager.SignOutAsync();
 
         ReturnUrl = returnUrl;
     }
@@ -44,16 +53,15 @@ public class LoginPage : BuddyPageModelBase
             return Page();
         }
 
-        var claims = new List<Claim>
+        var user = _userRepository.GetByUsername(ViewModel.Username);
+
+        if (user == null)
         {
-            new(ClaimTypes.Name, "John"),
-            new("FullName", "Doe")
-        };
+            ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+        }
 
-        var id = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+        await _cookieAuthenticationManager.SignInAsync(user, ViewModel.RememberMe);
 
-        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
-
-        return RedirectToPage("/Index");
+        return Redirect(returnUrl ?? "/");
     }
 }

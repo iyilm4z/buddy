@@ -10,13 +10,13 @@ public interface IRepository<TEntity> where TEntity : Entity
 {
     #region Insert
 
-    void Insert(TEntity entity);
+    TEntity Insert(TEntity entity);
 
     #endregion
 
     #region Update
 
-    void Update(TEntity entity);
+    TEntity Update(TEntity entity);
 
     #endregion
 

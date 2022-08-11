@@ -1,8 +1,10 @@
-﻿using Buddy.Domain.Repositories;
+﻿using Buddy.Dependency;
+using Buddy.Domain.Repositories;
 using Buddy.Users.Domain.Entities;
 
 namespace Buddy.Users.Domain.Repositories;
 
-public interface IUserRepository : IRepository<User>
+public interface IUserRepository : IRepository<User>, ITransientDependency
 {
+    User GetByUsername(string username);
 }

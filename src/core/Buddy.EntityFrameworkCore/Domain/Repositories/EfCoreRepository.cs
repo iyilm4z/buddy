@@ -1,75 +1,86 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using Buddy.Domain.Entities;
+using Buddy.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace Buddy.Domain.Repositories;
 
-public class EfCoreRepository<TEntity> : IRepository<TEntity> where TEntity : Entity
+public class EfCoreRepository<TEntity> : BuddyRepositoryBase<TEntity> where TEntity : Entity
 {
-    public IQueryable<TEntity> GetAll()
+    private readonly BuddyDbContext _dbContext;
+
+    public EfCoreRepository(BuddyDbContext dbContext)
     {
-        throw new NotImplementedException();
+        _dbContext = dbContext;
     }
 
-    public List<TEntity> GetAllList()
+    private void AttachIfNot(TEntity entity)
     {
-        throw new NotImplementedException();
+        var entry = _dbContext.ChangeTracker.Entries().FirstOrDefault(ent => ent.Entity == entity);
+        if (entry != null)
+        {
+            return;
+        }
+
+        _dbContext.Set<TEntity>().Attach(entity);
     }
 
-    public List<TEntity> GetAllList(Expression<Func<TEntity, bool>> predicate)
+    private TEntity GetFromChangeTrackerOrNull(int id)
     {
-        throw new NotImplementedException();
+        var entry = _dbContext.ChangeTracker.Entries()
+            .FirstOrDefault(
+                ent =>
+                    ent.Entity is TEntity entity &&
+                    EqualityComparer<int>.Default.Equals(id, entity.Id)
+            );
+
+        return entry?.Entity as TEntity;
     }
 
-    public TEntity Get(int id)
+    public override TEntity Insert(TEntity entity)
     {
-        throw new NotImplementedException();
+        var entityObj = _dbContext.Set<TEntity>().Add(entity).Entity;
+        
+        _dbContext.SaveChanges();
+
+        return entityObj;
     }
 
-    public TEntity FirstOrDefault(int id)
+    public override TEntity Update(TEntity entity)
     {
-        throw new NotImplementedException();
+        AttachIfNot(entity);
+        _dbContext.Entry(entity).State = EntityState.Modified;
+        return entity;
     }
 
-    public TEntity FirstOrDefault(Expression<Func<TEntity, bool>> predicate)
+    public override IQueryable<TEntity> GetAll()
     {
-        throw new NotImplementedException();
+        return _dbContext.Set<TEntity>();
     }
 
-    public void Insert(TEntity entity)
+    public override void Delete(TEntity entity)
     {
-        throw new NotImplementedException();
+        AttachIfNot(entity);
+        _dbContext.Set<TEntity>().Remove(entity);
     }
 
-    public void Update(TEntity entity)
+    public override void Delete(int id)
     {
-        throw new NotImplementedException();
-    }
+        var entity = GetFromChangeTrackerOrNull(id);
+        if (entity != null)
+        {
+            Delete(entity);
+            return;
+        }
 
-    public void Delete(int id)
-    {
-        throw new NotImplementedException();
-    }
+        entity = FirstOrDefault(id);
+        if (entity == null)
+        {
+            //Could not found the entity, do nothing.
+            return;
+        }
 
-    public void Delete(TEntity entity)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Delete(Expression<Func<TEntity, bool>> predicate)
-    {
-        throw new NotImplementedException();
-    }
-
-    public int Count()
-    {
-        throw new NotImplementedException();
-    }
-
-    public int Count(Expression<Func<TEntity, bool>> predicate)
-    {
-        throw new NotImplementedException();
+        Delete(entity);
     }
 }

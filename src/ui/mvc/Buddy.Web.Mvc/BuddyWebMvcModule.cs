@@ -1,10 +1,6 @@
 using System;
-using Buddy.Configuration;
 using Buddy.EntityFrameworkCore;
-using Buddy.Localization;
-using Buddy.Logging;
 using Buddy.Modularity;
-using Buddy.MultiTenancy;
 using Buddy.Users;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -17,10 +13,6 @@ namespace Buddy.Web;
 
 [DependsOn(
     typeof(BuddyWebMvcCoreModule),
-    typeof(BuddyConfigurationModule),
-    typeof(BuddyLocalizationModule),
-    typeof(BuddyLoggingModule),
-    typeof(BuddyMultiTenancyModule),
     typeof(BuddyUsersModule)
 )]
 public class BuddyWebMvcModule : BuddyModule
@@ -38,10 +30,7 @@ public class BuddyWebMvcModule : BuddyModule
 
         services.AddControllersWithViews();
 
-        services.AddRazorPages(options =>
-            {
-                options.Conventions.AuthorizeAreaFolder("Localization", "/Language");
-            })
+        services.AddRazorPages(options => { options.Conventions.AuthorizeAreaFolder("Admin", "/"); })
             .AddRazorRuntimeCompilation();
 
         services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

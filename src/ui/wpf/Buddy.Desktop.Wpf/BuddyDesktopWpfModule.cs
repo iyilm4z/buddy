@@ -1,10 +1,6 @@
 ﻿using System;
-using Buddy.Configuration;
 using Buddy.EntityFrameworkCore;
-using Buddy.Localization;
-using Buddy.Logging;
 using Buddy.Modularity;
-using Buddy.MultiTenancy;
 using Buddy.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -14,10 +10,6 @@ namespace Buddy.Desktop;
 
 [DependsOn(
     typeof(BuddyDesktopWpfCoreModule),
-    typeof(BuddyConfigurationModule),
-    typeof(BuddyLocalizationModule),
-    typeof(BuddyLoggingModule),
-    typeof(BuddyMultiTenancyModule),
     typeof(BuddyUsersModule)
 )]
 public class BuddyDesktopWpfModule : BuddyModule
