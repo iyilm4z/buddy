@@ -51,6 +51,9 @@ public class EfCoreRepository<TEntity> : BuddyRepositoryBase<TEntity> where TEnt
     {
         AttachIfNot(entity);
         _dbContext.Entry(entity).State = EntityState.Modified;
+        
+        _dbContext.SaveChanges();
+        
         return entity;
     }
 
@@ -63,6 +66,8 @@ public class EfCoreRepository<TEntity> : BuddyRepositoryBase<TEntity> where TEnt
     {
         AttachIfNot(entity);
         _dbContext.Set<TEntity>().Remove(entity);
+        
+        _dbContext.SaveChanges();
     }
 
     public override void Delete(int id)

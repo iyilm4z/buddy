@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
-using Buddy.Authentication;
 using Buddy.Users.Domain.Entities;
 using Buddy.Users.Domain.Repositories;
+using Buddy.Web.Authentication;
 using Buddy.Web.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc;
 

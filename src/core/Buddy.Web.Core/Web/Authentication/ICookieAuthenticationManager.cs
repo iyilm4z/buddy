@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Buddy.Users.Domain.Entities;
 
-namespace Buddy.Authentication;
+namespace Buddy.Web.Authentication;
 
 public interface ICookieAuthenticationManager
 {
