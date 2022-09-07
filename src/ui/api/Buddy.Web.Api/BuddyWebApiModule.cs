@@ -1,7 +1,8 @@
 using System;
+using System.Text;
 using Buddy.EntityFrameworkCore;
 using Buddy.Modularity;
-using Buddy.Users;
+using Buddy.Web.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,17 +10,18 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Buddy.Web;
 
 [DependsOn(
-    typeof(BuddyWebApiCoreModule),
-    typeof(BuddyUsersModule)
+    typeof(BuddyWebApiCoreModule)
 )]
 public class BuddyWebApiModule : BuddyModule
 {
     public override void ConfigureServices(IServiceCollection services)
     {
+        // TODO remove this line
         var serviceProvider = services.BuildServiceProvider();
 
         var env = serviceProvider.GetService<IWebHostEnvironment>();
@@ -32,9 +34,31 @@ public class BuddyWebApiModule : BuddyModule
 
         services.AddMvc();
         services.AddSwaggerGen();
-        
-        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer();
+
+        var jwtTokenConfig = configuration.GetSection("JwtTokenConfig").Get<JwtTokenConfig>();
+
+        services.AddSingleton(jwtTokenConfig);
+
+        services.AddAuthentication(x =>
+        {
+            x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        }).AddJwtBearer(x =>
+        {
+            x.RequireHttpsMetadata = true;
+            x.SaveToken = true;
+            x.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidIssuer = jwtTokenConfig.Issuer,
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtTokenConfig.Secret)),
+                ValidAudience = jwtTokenConfig.Audience,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ClockSkew = TimeSpan.FromMinutes(1)
+            };
+        });
     }
 
     public override void Configure(IServiceProvider serviceProvider)
@@ -58,6 +82,7 @@ public class BuddyWebApiModule : BuddyModule
         app.UseRouting();
 
         app.UseAuthentication();
+
         app.UseAuthorization();
 
         app.UseEndpoints(endpoints =>

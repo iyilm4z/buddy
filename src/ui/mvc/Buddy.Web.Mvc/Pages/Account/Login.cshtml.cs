@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Buddy.Users.Domain.Entities;
 using Buddy.Users.Domain.Repositories;
 using Buddy.Web.Authentication;
+using Buddy.Web.Authentication.Cookies;
 using Buddy.Web.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc;
 

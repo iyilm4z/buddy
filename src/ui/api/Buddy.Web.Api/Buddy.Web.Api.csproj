@@ -15,7 +15,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\..\modules\Buddy.Users\Buddy.Users.csproj"/>
         <ProjectReference Include="..\Buddy.Web.Api.Core\Buddy.Web.Api.Core.csproj"/>
     </ItemGroup>
 

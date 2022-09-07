@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Buddy.Web.Authentication;
+using Buddy.Web.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
