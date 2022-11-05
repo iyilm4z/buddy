@@ -1,12 +1,8 @@
-using System.ComponentModel.DataAnnotations;
+﻿namespace Buddy.Web.Authentication.JwtBearer;
 
-namespace Buddy.Web.Authentication.JwtBearer;
-
-public class JwtTokenAuthenticateRequest
+public class JwtTokenAuthenticationResult
 {
-    [Required]
-    public string UsernameOrEmail { get; set; }
+    public string AccessToken { get; set; }
 
-    [Required]
-    public string Password { get; set; }
+    public string RefreshToken { get; set; }
 }

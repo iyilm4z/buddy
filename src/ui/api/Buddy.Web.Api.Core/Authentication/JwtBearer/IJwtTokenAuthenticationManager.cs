@@ -1,10 +1,12 @@
-﻿namespace Buddy.Web.Authentication.JwtBearer;
+﻿using Buddy.Users.Domain.Entities;
+
+namespace Buddy.Web.Authentication.JwtBearer;
 
 public interface IJwtTokenAuthenticationManager
 {
-    JwtTokenAuthenticateResult Authenticate(JwtTokenAuthenticateRequest authenticateRequest);
+    JwtTokenAuthenticationResult Authenticate(IUser user);
 
-    JwtTokenAuthenticateResult Refresh(JwtTokenRefreshRequest refreshRequest);
+    JwtTokenAuthenticationResult Refresh(string accessToken, string refreshToken);
 
     bool Revoke(string accessToken);
 }

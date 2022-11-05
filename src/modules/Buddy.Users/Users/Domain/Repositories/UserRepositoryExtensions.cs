@@ -10,4 +10,9 @@ public static class UserRepositoryExtensions
     {
         return await repository.FirstOrDefaultAsync(x => x.Username == username);
     }
+
+    public static async Task<User> GetByEmailAsync(this IRepository<User> repository, string email)
+    {
+        return await repository.FirstOrDefaultAsync(x => x.Email == email);
+    }
 }

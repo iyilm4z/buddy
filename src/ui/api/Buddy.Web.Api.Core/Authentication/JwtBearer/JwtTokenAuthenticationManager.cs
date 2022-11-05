@@ -3,30 +3,23 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using Buddy.Domain.Repositories;
 using Buddy.Runtime.Security;
 using Buddy.Users.Domain.Entities;
-using Buddy.Users.Domain.Repositories;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Buddy.Web.Authentication.JwtBearer;
 
 public class JwtTokenAuthenticationManager : IJwtTokenAuthenticationManager
 {
-    private readonly IRepository<User> _userRepository;
     private readonly JwtTokenAuthenticationConfig _jwtTokenAuthenticationConfig;
 
-    public JwtTokenAuthenticationManager(IRepository<User> userRepository,
-        JwtTokenAuthenticationConfig jwtTokenAuthenticationConfig)
+    public JwtTokenAuthenticationManager(JwtTokenAuthenticationConfig jwtTokenAuthenticationConfig)
     {
-        _userRepository = userRepository;
         _jwtTokenAuthenticationConfig = jwtTokenAuthenticationConfig;
     }
 
-    public JwtTokenAuthenticateResult Authenticate(JwtTokenAuthenticateRequest authenticateRequest)
+    public JwtTokenAuthenticationResult Authenticate(IUser user)
     {
-        var user = _userRepository.GetByUsernameAsync(authenticateRequest.UsernameOrEmail);
-
         var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_jwtTokenAuthenticationConfig.Secret));
 
         var tokenDescriptor = new SecurityTokenDescriptor
@@ -43,14 +36,14 @@ public class JwtTokenAuthenticationManager : IJwtTokenAuthenticationManager
 
         var token = tokenHandler.CreateToken(tokenDescriptor);
 
-        return new JwtTokenAuthenticateResult
+        return new JwtTokenAuthenticationResult
         {
             AccessToken = tokenHandler.WriteToken(token),
             RefreshToken = GenerateRefreshTokenString()
         };
     }
 
-    public JwtTokenAuthenticateResult Refresh(JwtTokenRefreshRequest refreshRequest)
+    public JwtTokenAuthenticationResult Refresh(string accessToken, string refreshToken)
     {
         throw new NotImplementedException();
     }

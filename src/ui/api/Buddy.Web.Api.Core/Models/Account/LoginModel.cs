@@ -5,7 +5,7 @@ namespace Buddy.Web.Models.Account;
 public class LoginModel
 {
     [Required] 
-    public string UserName { get; set; }
+    public string UsernameOrEmail { get; set; }
 
     [Required] 
     public string Password { get; set; }
