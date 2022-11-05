@@ -35,9 +35,10 @@ public class BuddyWebApiModule : BuddyModule
         services.AddMvc();
         services.AddSwaggerGen();
 
-        var jwtTokenConfig = configuration.GetSection("JwtTokenConfig").Get<JwtTokenConfig>();
+        var jwtTokenAuthConfig = configuration.GetSection(JwtTokenAuthenticationConfig.ConfigKey)
+            .Get<JwtTokenAuthenticationConfig>();
 
-        services.AddSingleton(jwtTokenConfig);
+        services.AddSingleton(jwtTokenAuthConfig);
 
         services.AddAuthentication(x =>
         {
@@ -50,10 +51,10 @@ public class BuddyWebApiModule : BuddyModule
             x.TokenValidationParameters = new TokenValidationParameters
             {
                 ValidateIssuer = true,
-                ValidIssuer = jwtTokenConfig.Issuer,
+                ValidIssuer = jwtTokenAuthConfig.Issuer,
                 ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtTokenConfig.Secret)),
-                ValidAudience = jwtTokenConfig.Audience,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtTokenAuthConfig.Secret)),
+                ValidAudience = jwtTokenAuthConfig.Audience,
                 ValidateAudience = true,
                 ValidateLifetime = true,
                 ClockSkew = TimeSpan.FromMinutes(1)

@@ -6,4 +6,10 @@ namespace Buddy.Web.Mvc;
 [ApiController]
 public class BuddyControllerBase : ControllerBase
 {
+    //public IBuddySession BuddySession { get; set; }
+
+    public BuddyControllerBase()
+    {
+        //BuddySession = NullBuddySession.Instance;
+    }
 }

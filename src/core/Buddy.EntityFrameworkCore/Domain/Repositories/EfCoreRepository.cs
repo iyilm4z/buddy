@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Buddy.Domain.Entities;
 using Buddy.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -41,7 +44,7 @@ public class EfCoreRepository<TEntity> : BuddyRepositoryBase<TEntity> where TEnt
     public override TEntity Insert(TEntity entity)
     {
         var entityObj = _dbContext.Set<TEntity>().Add(entity).Entity;
-        
+
         _dbContext.SaveChanges();
 
         return entityObj;
@@ -51,9 +54,19 @@ public class EfCoreRepository<TEntity> : BuddyRepositoryBase<TEntity> where TEnt
     {
         AttachIfNot(entity);
         _dbContext.Entry(entity).State = EntityState.Modified;
-        
+
         _dbContext.SaveChanges();
-        
+
+        return entity;
+    }
+
+    public override async Task<TEntity> UpdateAsync(TEntity entity)
+    {
+        AttachIfNot(entity);
+        _dbContext.Entry(entity).State = EntityState.Modified;
+
+        await _dbContext.SaveChangesAsync();
+
         return entity;
     }
 
@@ -61,12 +74,17 @@ public class EfCoreRepository<TEntity> : BuddyRepositoryBase<TEntity> where TEnt
     {
         return _dbContext.Set<TEntity>();
     }
+    
+    public override Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate)
+    {
+        return GetAll().FirstOrDefaultAsync(predicate);
+    }
 
     public override void Delete(TEntity entity)
     {
         AttachIfNot(entity);
         _dbContext.Set<TEntity>().Remove(entity);
-        
+
         _dbContext.SaveChanges();
     }
 

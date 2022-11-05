@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Buddy.Domain.Entities;
 
 namespace Buddy.Domain.Repositories;
@@ -17,6 +18,7 @@ public abstract class BuddyRepositoryBase<TEntity> : IRepository<TEntity> where 
     #region Update
 
     public abstract TEntity Update(TEntity entity);
+    public abstract Task<TEntity> UpdateAsync(TEntity entity);
 
     #endregion
 
@@ -54,6 +56,8 @@ public abstract class BuddyRepositoryBase<TEntity> : IRepository<TEntity> where 
     {
         return GetAll().FirstOrDefault(predicate);
     }
+
+    public abstract Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate);
 
     #endregion
 

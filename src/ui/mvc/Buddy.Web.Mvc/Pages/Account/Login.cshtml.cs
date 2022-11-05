@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
+using Buddy.Domain.Repositories;
 using Buddy.Users.Domain.Entities;
 using Buddy.Users.Domain.Repositories;
-using Buddy.Web.Authentication;
 using Buddy.Web.Authentication.Cookies;
 using Buddy.Web.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc;
@@ -12,10 +12,10 @@ namespace Buddy.Web.Pages.Account;
 public class LoginModel : BuddyPageModelBase
 {
     private readonly ICookieAuthenticationManager _cookieAuthenticationManager;
-    private readonly IUserRepository _userRepository;
+    private readonly IRepository<User> _userRepository;
 
-    public LoginModel(ICookieAuthenticationManager cookieAuthenticationManager, 
-        IUserRepository userRepository)
+    public LoginModel(ICookieAuthenticationManager cookieAuthenticationManager,
+        IRepository<User> userRepository)
     {
         _cookieAuthenticationManager = cookieAuthenticationManager;
         _userRepository = userRepository;
@@ -54,7 +54,7 @@ public class LoginModel : BuddyPageModelBase
             return Page();
         }
 
-        var user = _userRepository.GetByUsername(ViewModel.Username);
+        var user = await _userRepository.GetByUsernameAsync(ViewModel.Username);
 
         if (user == null)
         {

@@ -5,15 +5,9 @@ using Microsoft.Extensions.Hosting;
 
 namespace Buddy.Web.Authentication.JwtBearer;
 
-public class JwtRefreshTokenCache : IHostedService, IDisposable
+public class ClearExpiredRefreshTokensJob : IHostedService, IDisposable
 {
     private Timer _timer;
-    private readonly IJwtAuthenticationManager _jwtAuthenticationManager;
-
-    public JwtRefreshTokenCache(IJwtAuthenticationManager jwtAuthenticationManager)
-    {
-        _jwtAuthenticationManager = jwtAuthenticationManager;
-    }
 
     public Task StartAsync(CancellationToken stoppingToken)
     {
@@ -25,7 +19,7 @@ public class JwtRefreshTokenCache : IHostedService, IDisposable
 
     private void DoWork(object state)
     {
-        _jwtAuthenticationManager.RemoveExpiredRefreshTokens(DateTime.Now);
+        // RemoveExpiredRefreshTokens(DateTime.Now);
     }
 
     public Task StopAsync(CancellationToken stoppingToken)

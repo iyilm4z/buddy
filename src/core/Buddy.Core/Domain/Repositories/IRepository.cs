@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Buddy.Domain.Entities;
 
 namespace Buddy.Domain.Repositories;
@@ -17,6 +18,8 @@ public interface IRepository<TEntity> where TEntity : Entity
     #region Update
 
     TEntity Update(TEntity entity);
+    
+    Task<TEntity> UpdateAsync(TEntity entity);
 
     #endregion
 
@@ -33,6 +36,8 @@ public interface IRepository<TEntity> where TEntity : Entity
     TEntity FirstOrDefault(int id);
 
     TEntity FirstOrDefault(Expression<Func<TEntity, bool>> predicate);
+    
+    Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate);
 
     #endregion
 

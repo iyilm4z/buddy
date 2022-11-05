@@ -14,8 +14,8 @@ public class BuddyWebApiCoreModule : BuddyModule
 {
     public override void ConfigureServices(IServiceCollection services)
     {
-        services.AddSingleton<IJwtAuthenticationManager, JwtAuthenticationManager>();
-        services.AddHostedService<JwtRefreshTokenCache>();
+        services.AddSingleton<IJwtTokenAuthenticationManager, JwtTokenAuthenticationManager>();
+        services.AddHostedService<ClearExpiredRefreshTokensJob>();
     }
 
     public override void Configure(IServiceProvider serviceProvider)

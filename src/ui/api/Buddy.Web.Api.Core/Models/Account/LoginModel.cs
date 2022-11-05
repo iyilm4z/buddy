@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Buddy.Web.Models.Account;
 
-public class LoginRequest
+public class LoginModel
 {
     [Required] 
     public string UserName { get; set; }
