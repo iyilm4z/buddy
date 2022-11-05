@@ -61,26 +61,26 @@ public class AccountController : BuddyControllerBase
     }
 
     [Authorize]
-    [HttpPost("logout")]
-    public ActionResult Logout()
-    {
-        // TODO 
-        return Ok();
-    }
-
-    [Authorize]
     [HttpPost("refresh-token")]
-    public async Task<ActionResult> RefreshToken([FromBody] RefreshTokenModel model)
+    public IActionResult RefreshToken([FromBody] RefreshTokenModel model)
     {
-        // TODO 
-        return Ok();
+        if (ModelState.IsValid)
+        {
+            return Ok(_jwtTokenAuthenticationManager.Refresh(model.AccessToken, model.RefreshToken));
+        }
+
+        return Unauthorized("ModelNotValid");
     }
 
     [Authorize]
     [HttpPost("revoke")]
-    public IActionResult Revoke()
+    public IActionResult Revoke([FromBody] RevokeTokenModel model)
     {
-        // TODO 
-        return Ok();
+        if (ModelState.IsValid)
+        {
+            return Ok(_jwtTokenAuthenticationManager.Revoke(model.AccessToken));
+        }
+
+        return Unauthorized("ModelNotValid");
     }
 }
