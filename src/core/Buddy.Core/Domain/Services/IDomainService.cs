@@ -1,5 +1,7 @@
-﻿namespace Buddy.Domain.Services;
+﻿using Buddy.Dependency;
 
-public interface IDomainService
+namespace Buddy.Domain.Services;
+
+public interface IDomainService : ITransientDependency
 {
 }
