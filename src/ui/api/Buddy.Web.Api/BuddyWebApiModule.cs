@@ -2,6 +2,7 @@ using System;
 using System.Text;
 using Buddy.EntityFrameworkCore;
 using Buddy.Modularity;
+using Buddy.Users;
 using Buddy.Web.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -15,7 +16,9 @@ using Microsoft.IdentityModel.Tokens;
 namespace Buddy.Web;
 
 [DependsOn(
-    typeof(BuddyWebApiCoreModule)
+    typeof(BuddyWebApiCoreModule),
+    typeof(BuddyEntityFrameworkCoreModule),
+    typeof(BuddyUsersModule)
 )]
 public class BuddyWebApiModule : BuddyModule
 {

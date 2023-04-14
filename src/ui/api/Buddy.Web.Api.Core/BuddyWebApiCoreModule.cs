@@ -1,14 +1,12 @@
 ﻿using System;
 using Buddy.Modularity;
-using Buddy.Users;
 using Buddy.Web.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Buddy.Web;
 
 [DependsOn(
-    typeof(BuddyWebCoreModule),
-    typeof(BuddyUsersModule)
+    typeof(BuddyWebCoreModule)
 )]
 public class BuddyWebApiCoreModule : BuddyModule
 {

@@ -1,12 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
+    <Import Project="..\..\..\..\common.props"/>
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net7.0-windows</TargetFramework>
         <RootNamespace>Buddy.Desktop</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\..\core\Buddy.Core\Buddy.Core.csproj"/>
+        <ProjectReference Include="..\..\..\core\Buddy.Core\Buddy.Core.csproj" />
     </ItemGroup>
 
 </Project>

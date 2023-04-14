@@ -1,4 +1,5 @@
-﻿using Buddy.Users.Domain.Entities;
+﻿using Buddy.Users;
+using Buddy.Users.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Buddy.EntityFrameworkCore;

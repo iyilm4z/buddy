@@ -1,12 +1,11 @@
 ﻿using System;
-using Buddy.EntityFrameworkCore;
 using Buddy.Modularity;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Buddy.Users;
 
 [DependsOn(
-    typeof(BuddyEntityFrameworkCoreModule)
+    typeof(BuddyUsersSharedModule)
 )]
 public class BuddyUsersModule : BuddyModule
 {

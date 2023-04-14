@@ -31,33 +31,33 @@ public class AccountController : BuddyControllerBase
     [HttpPost("login")]
     public async Task<ActionResult> Login([FromBody] LoginModel model)
     {
-        if (ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
-            var userLoginResult = await _userDomainService.CheckUserLoginAsync(model.UsernameOrEmail, model.Password);
-
-            switch (userLoginResult)
-            {
-                case UserLoginResult.Successful:
-                    var user = UserSettings.UsernamesEnabled
-                        ? await _userRepository.GetByUsernameAsync(model.UsernameOrEmail)
-                        : await _userRepository.GetByEmailAsync(model.UsernameOrEmail);
-
-                    return Ok(_jwtTokenAuthenticationManager.Authenticate(user));
-                case UserLoginResult.NotExist:
-                    return Unauthorized("NotExist");
-                case UserLoginResult.LockedOut:
-                    return Unauthorized("LockedOut");
-                case UserLoginResult.Deleted:
-                    return Unauthorized("Deleted");
-                case UserLoginResult.NotActive:
-                    return Unauthorized("NotActive");
-                case UserLoginResult.WrongPassword:
-                default:
-                    return Unauthorized("WrongPassword");
-            }
+            return Unauthorized("ModelNotValid");
         }
 
-        return Unauthorized("ModelNotValid");
+        var userLoginResult = await _userDomainService.CheckUserLoginAsync(model.UsernameOrEmail, model.Password);
+
+        switch (userLoginResult)
+        {
+            case UserLoginResult.Successful:
+                var user = UserSettings.UsernamesEnabled
+                    ? await _userRepository.GetByUsernameAsync(model.UsernameOrEmail)
+                    : await _userRepository.GetByEmailAsync(model.UsernameOrEmail);
+
+                return Ok(_jwtTokenAuthenticationManager.Authenticate(user));
+            case UserLoginResult.NotExist:
+                return Unauthorized("NotExist");
+            case UserLoginResult.LockedOut:
+                return Unauthorized("LockedOut");
+            case UserLoginResult.Deleted:
+                return Unauthorized("Deleted");
+            case UserLoginResult.NotActive:
+                return Unauthorized("NotActive");
+            case UserLoginResult.WrongPassword:
+            default:
+                return Unauthorized("WrongPassword");
+        }
     }
 
     [Authorize]

@@ -1,7 +1,7 @@
 ﻿using Buddy.Users.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Buddy.EntityFrameworkCore;
+namespace Buddy.Users;
 
 public interface IUsersDbContext
 {

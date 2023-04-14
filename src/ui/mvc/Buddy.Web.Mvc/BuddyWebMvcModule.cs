@@ -13,6 +13,7 @@ namespace Buddy.Web;
 
 [DependsOn(
     typeof(BuddyWebMvcCoreModule),
+    typeof(BuddyEntityFrameworkCoreModule),
     typeof(BuddyUsersModule)
 )]
 public class BuddyWebMvcModule : BuddyModule

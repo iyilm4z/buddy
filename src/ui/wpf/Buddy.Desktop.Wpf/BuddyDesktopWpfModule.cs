@@ -10,6 +10,7 @@ namespace Buddy.Desktop;
 
 [DependsOn(
     typeof(BuddyDesktopWpfCoreModule),
+    typeof(BuddyEntityFrameworkCoreModule),
     typeof(BuddyUsersModule)
 )]
 public class BuddyDesktopWpfModule : BuddyModule
