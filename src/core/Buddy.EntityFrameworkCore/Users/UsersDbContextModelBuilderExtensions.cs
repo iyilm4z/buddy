@@ -10,11 +10,11 @@ public static class UsersDbContextModelBuilderExtensions
         where TDbContext : IUsersDbContext
     {
         builder.ConfigureUserEntity();
-        builder.ConfigureUserRoleEntity();
-        builder.ConfigureUserUserRoleMappingEntity();
+        builder.ConfigureRoleEntity();
+        builder.ConfigureUserRoleMappingEntity();
         builder.ConfigureUserPasswordEntity();
         builder.ConfigurePermissionRecordEntity();
-        builder.ConfigurePermissionRecordUserRoleMappingEntity();
+        builder.ConfigureRolePermissionRecordMappingEntity();
     }
 
     private static void ConfigureUserEntity(this ModelBuilder builder)
@@ -24,45 +24,48 @@ public static class UsersDbContextModelBuilderExtensions
             b.ToTable(IUser.UserTableName);
             b.HasKey(user => user.Id);
 
-            b.Property(user => user.Username).HasMaxLength(1000).HasColumnName(nameof(IUser.Username));
-            b.Property(user => user.Email).HasMaxLength(1000).HasColumnName(nameof(IUser.Email));
-            b.Property(user => user.EmailToRevalidate).HasMaxLength(1000);
-            b.Property(user => user.SystemName).HasMaxLength(400);
+            b.Property(user => user.Username).HasColumnName(nameof(IUser.Username));
+            b.Property(user => user.Email).HasColumnName(nameof(IUser.Email));
+            b.Property(user => user.EmailToRevalidate);
+            b.Property(user => user.SystemName);
 
-            b.Ignore(user => user.UserRoles);
+            b.HasMany(x => x.Passwords)
+                .WithOne()
+                .HasForeignKey(password => password.UserId)
+                .IsRequired();
         });
     }
 
-    private static void ConfigureUserRoleEntity(this ModelBuilder builder)
+    private static void ConfigureRoleEntity(this ModelBuilder builder)
     {
-        builder.Entity<UserRole>(b =>
+        builder.Entity<Role>(b =>
         {
-            b.ToTable(nameof(UserRole));
+            b.ToTable(nameof(Role));
             b.HasKey(role => role.Id);
 
-            b.Property(role => role.Name).HasMaxLength(255).IsRequired();
-            b.Property(role => role.SystemName).HasMaxLength(255);
+            b.Property(role => role.Name);
+            b.Property(role => role.SystemName);
         });
     }
 
-    private static void ConfigureUserUserRoleMappingEntity(this ModelBuilder builder)
+    private static void ConfigureUserRoleMappingEntity(this ModelBuilder builder)
     {
-        builder.Entity<UserUserRoleMapping>(b =>
+        builder.Entity<UserRoleMapping>(b =>
         {
-            b.ToTable($"{IUser.UserTableName}_{nameof(UserRole)}_Mapping");
-            b.HasKey(mapping => new { mapping.UserId, mapping.UserRoleId });
+            b.ToTable($"{IUser.UserTableName}_{nameof(Role)}_Mapping");
+            b.HasKey(mapping => new { mapping.UserId, UserRoleId = mapping.RoleId });
 
             b.Property(mapping => mapping.UserId).HasColumnName($"{IUser.UserTableName}_Id");
-            b.Property(mapping => mapping.UserRoleId).HasColumnName($"{nameof(UserRole)}_Id");
+            b.Property(mapping => mapping.RoleId).HasColumnName($"{nameof(Role)}_Id");
 
-            b.HasOne(mapping => mapping.User)
-                .WithMany(user => user.UserUserRoleMappings)
-                .HasForeignKey(mapping => mapping.UserId)
+            b.HasOne<User>()
+                .WithMany(x => x.Roles)
+                .HasForeignKey(x => x.UserId)
                 .IsRequired();
 
-            b.HasOne(mapping => mapping.UserRole)
+            b.HasOne<Role>()
                 .WithMany()
-                .HasForeignKey(mapping => mapping.UserRoleId)
+                .HasForeignKey(x => x.RoleId)
                 .IsRequired();
 
             b.Ignore(mapping => mapping.Id);
@@ -76,11 +79,6 @@ public static class UsersDbContextModelBuilderExtensions
             b.ToTable(nameof(UserPassword));
             b.HasKey(password => password.Id);
 
-            b.HasOne(password => password.User)
-                .WithMany()
-                .HasForeignKey(password => password.UserId)
-                .IsRequired();
-
             b.Ignore(password => password.PasswordFormat);
         });
     }
@@ -92,30 +90,30 @@ public static class UsersDbContextModelBuilderExtensions
             b.ToTable(nameof(PermissionRecord));
             b.HasKey(record => record.Id);
 
-            b.Property(record => record.Name).IsRequired();
-            b.Property(record => record.SystemName).HasMaxLength(255).IsRequired();
-            b.Property(record => record.Category).HasMaxLength(255).IsRequired();
+            b.Property(record => record.Name);
+            b.Property(record => record.SystemName);
+            b.Property(record => record.Category);
         });
     }
 
-    private static void ConfigurePermissionRecordUserRoleMappingEntity(this ModelBuilder builder)
+    private static void ConfigureRolePermissionRecordMappingEntity(this ModelBuilder builder)
     {
-        builder.Entity<PermissionRecordUserRoleMapping>(b =>
+        builder.Entity<RolePermissionRecordMapping>(b =>
         {
-            b.ToTable($"{nameof(PermissionRecord)}_{nameof(UserRole)}_Mapping");
-            b.HasKey(mapping => new { mapping.PermissionRecordId, mapping.UserRoleId });
+            b.ToTable($"{nameof(PermissionRecord)}_{nameof(Role)}_Mapping");
+            b.HasKey(mapping => new { mapping.PermissionRecordId, UserRoleId = mapping.RoleId });
 
             b.Property(mapping => mapping.PermissionRecordId).HasColumnName($"{nameof(PermissionRecord)}_Id");
-            b.Property(mapping => mapping.UserRoleId).HasColumnName($"{nameof(UserRole)}_Id");
+            b.Property(mapping => mapping.RoleId).HasColumnName($"{nameof(Role)}_Id");
 
-            b.HasOne(mapping => mapping.UserRole)
-                .WithMany(role => role.PermissionRecordUserRoleMappings)
-                .HasForeignKey(mapping => mapping.UserRoleId)
+            b.HasOne<Role>()
+                .WithMany(x => x.PermissionRecords)
+                .HasForeignKey(x => x.RoleId)
                 .IsRequired();
 
-            b.HasOne(mapping => mapping.PermissionRecord)
-                .WithMany(record => record.PermissionRecordUserRoleMappings)
-                .HasForeignKey(mapping => mapping.PermissionRecordId)
+            b.HasOne<PermissionRecord>()
+                .WithMany()
+                .HasForeignKey(x => x.PermissionRecordId)
                 .IsRequired();
 
             b.Ignore(mapping => mapping.Id);

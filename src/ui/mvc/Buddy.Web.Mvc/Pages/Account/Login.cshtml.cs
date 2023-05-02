@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
-using Buddy.Domain.Repositories;
-using Buddy.Users.Domain.Entities;
-using Buddy.Users.Domain.Repositories;
+using Buddy.Users.Application;
+using Buddy.Users.Application.Dto;
+using Buddy.Users.Domain.Services;
 using Buddy.Web.Authentication.Cookies;
 using Buddy.Web.Mvc.RazorPages;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Buddy.Web.Pages.Account;
@@ -12,13 +13,13 @@ namespace Buddy.Web.Pages.Account;
 public class LoginModel : BuddyPageModelBase
 {
     private readonly ICookieAuthenticationManager _cookieAuthenticationManager;
-    private readonly IRepository<User> _userRepository;
+    private readonly IAccountAppService _accountAppService;
 
     public LoginModel(ICookieAuthenticationManager cookieAuthenticationManager,
-        IRepository<User> userRepository)
+        IAccountAppService accountAppService)
     {
         _cookieAuthenticationManager = cookieAuthenticationManager;
-        _userRepository = userRepository;
+        _accountAppService = accountAppService;
     }
 
     [BindProperty] public LoginPageViewModel ViewModel { get; set; }
@@ -29,7 +30,7 @@ public class LoginModel : BuddyPageModelBase
 
     public class LoginPageViewModel
     {
-        [Required] public string Username { get; set; }
+        [Required] public string UsernameOrEmail { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -54,15 +55,28 @@ public class LoginModel : BuddyPageModelBase
             return Page();
         }
 
-        var user = await _userRepository.GetByUsernameAsync(ViewModel.Username);
-
-        if (user == null)
+        var loginOutput = await _accountAppService.LoginAsync(new LoginInputDto
         {
-            ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+            UsernameOrEmail = ViewModel.UsernameOrEmail,
+            Password = ViewModel.Password
+        });
+
+        switch (loginOutput.Result)
+        {
+            case UserLoginResult.Successful:
+                await _cookieAuthenticationManager.SignInAsync(loginOutput.LoggedInUser, ViewModel.RememberMe);
+                return Redirect(returnUrl ?? "/");
+            case UserLoginResult.NotExist:
+                return StatusCode(StatusCodes.Status401Unauthorized, "NotExist");
+            case UserLoginResult.LockedOut:
+                return StatusCode(StatusCodes.Status401Unauthorized, "LockedOut");
+            case UserLoginResult.Deleted:
+                return StatusCode(StatusCodes.Status401Unauthorized, "Deleted");
+            case UserLoginResult.NotActive:
+                return StatusCode(StatusCodes.Status401Unauthorized, "NotActive");
+            case UserLoginResult.WrongPassword:
+            default:
+                return StatusCode(StatusCodes.Status401Unauthorized, "WrongPassword");
         }
-
-        await _cookieAuthenticationManager.SignInAsync(user, ViewModel.RememberMe);
-
-        return Redirect(returnUrl ?? "/");
     }
 }

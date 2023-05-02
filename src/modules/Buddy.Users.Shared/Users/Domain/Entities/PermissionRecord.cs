@@ -1,36 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Buddy.Domain.Entities;
 
 namespace Buddy.Users.Domain.Entities;
 
-/// <summary>
-///     Represents a permission record
-/// </summary>
-public class PermissionRecord : Entity
+[Serializable]
+public class PermissionRecord : AggregateRoot
 {
-    private ICollection<PermissionRecordUserRoleMapping> _permissionRecordUserRoleMappings;
-
-    /// <summary>
-    ///     Gets or sets the permission name
-    /// </summary>
-    public string Name { get; set; }
-
-    /// <summary>
-    ///     Gets or sets the permission system name
-    /// </summary>
-    public string SystemName { get; set; }
-
-    /// <summary>
-    ///     Gets or sets the permission category
-    /// </summary>
-    public string Category { get; set; }
-
-    /// <summary>
-    ///     Gets or sets the permission record-User role mappings
-    /// </summary>
-    public virtual ICollection<PermissionRecordUserRoleMapping> PermissionRecordUserRoleMappings
+    public PermissionRecord(string name, string systemName, string category)
     {
-        get => _permissionRecordUserRoleMappings ??= new List<PermissionRecordUserRoleMapping>();
-        protected set => _permissionRecordUserRoleMappings = value;
+        Name = name ?? throw new ArgumentNullException(nameof(name));
+        SystemName = systemName ?? throw new ArgumentNullException(nameof(systemName));
+        Category = category ?? throw new ArgumentNullException(nameof(category));
     }
+
+    [Required] public string Name { get; private set; }
+
+    [Required]
+    [MaxLength(PermissionRecordConsts.SystemNameMaxLength)]
+    public string SystemName { get; private set; }
+
+    [Required]
+    [MaxLength(PermissionRecordConsts.CategoryMaxLength)]
+    public string Category { get; private set; }
 }

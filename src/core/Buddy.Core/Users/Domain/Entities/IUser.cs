@@ -4,7 +4,7 @@ public interface IUser
 {
     public const string UserTableName = "User";
 
-    int Id { get; set; }
+    int Id { get; }
 
     string Username { get; set; }
 

@@ -1,14 +1,15 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.ComponentModel.DataAnnotations;
 using Buddy.Domain.Entities;
 
 namespace Buddy.Users.Domain.Entities;
 
-public class User : Entity, IUser
+[Serializable]
+public class User : AggregateRoot, IUser
 {
-    private IList<UserRole> _userRoles;
-    private ICollection<UserUserRoleMapping> _userUserRoleMappings;
+    private ICollection<UserRoleMapping> _userRoleMappings;
+    private ICollection<UserPassword> _userPasswords;
 
     public User()
     {
@@ -17,10 +18,12 @@ public class User : Entity, IUser
 
     public Guid UserGuid { get; set; }
 
+    [MaxLength(UserConsts.UsernameMaxLength)]
     public string Username { get; set; }
 
-    public string Email { get; set; }
+    [MaxLength(UserConsts.EmailMaxLength)] public string Email { get; set; }
 
+    [MaxLength(UserConsts.EmailToRevalidateMaxLength)]
     public string EmailToRevalidate { get; set; }
 
     public string AdminComment { get; set; }
@@ -37,6 +40,7 @@ public class User : Entity, IUser
 
     public bool IsSystemAccount { get; set; }
 
+    [MaxLength(UserConsts.SystemNameMaxLength)]
     public string SystemName { get; set; }
 
     public string LastIpAddress { get; set; }
@@ -49,30 +53,29 @@ public class User : Entity, IUser
 
     #region Navigation properties
 
-    public virtual IList<UserRole> UserRoles => _userRoles ??= UserUserRoleMappings
-        .Select(mapping => mapping.UserRole)
-        .ToList();
-
-    public virtual ICollection<UserUserRoleMapping> UserUserRoleMappings
+    public virtual ICollection<UserRoleMapping> Roles
     {
-        get => _userUserRoleMappings ??= new List<UserUserRoleMapping>();
-        protected set => _userUserRoleMappings = value;
+        get => _userRoleMappings ??= new List<UserRoleMapping>();
+        protected set => _userRoleMappings = value;
+    }
+
+    public ICollection<UserPassword> Passwords  {
+        get => _userPasswords ??= new List<UserPassword>();
+        protected set => _userPasswords = value;
     }
 
     #endregion
 
     #region Methods
 
-    public void AddUserRoleMapping(UserUserRoleMapping role)
+    public void AddUserRoleMapping(UserRoleMapping role)
     {
-        UserUserRoleMappings.Add(role);
-        _userRoles = null;
+        Roles.Add(role);
     }
 
-    public void RemoveUserRoleMapping(UserUserRoleMapping role)
+    public void RemoveUserRoleMapping(UserRoleMapping role)
     {
-        UserUserRoleMappings.Remove(role);
-        _userRoles = null;
+        Roles.Remove(role);
     }
 
     #endregion

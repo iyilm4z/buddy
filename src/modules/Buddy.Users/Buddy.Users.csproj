@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <Import Project="..\..\..\common.props"/>
-    
+
     <PropertyGroup>
         <TargetFramework>net7.0</TargetFramework>
         <RootNamespace>Buddy</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Buddy.Users.Shared\Buddy.Users.Shared.csproj" />
+        <ProjectReference Include="..\Buddy.Users.Shared\Buddy.Users.Shared.csproj"/>
     </ItemGroup>
 
 </Project>

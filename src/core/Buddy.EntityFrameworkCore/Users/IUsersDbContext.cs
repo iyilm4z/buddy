@@ -7,13 +7,13 @@ public interface IUsersDbContext
 {
     DbSet<User> Users { get; set; }
 
-    DbSet<UserRole> UserRoles { get; set; }
+    DbSet<Role> Roles { get; set; }
 
-    DbSet<UserUserRoleMapping> UserUserRoleMappings { get; set; }
+    DbSet<UserRoleMapping> UserUserRoleMappings { get; set; }
 
     DbSet<UserPassword> UserPasswords { get; set; }
 
     DbSet<PermissionRecord> PermissionRecords { get; set; }
 
-    DbSet<PermissionRecordUserRoleMapping> PermissionRecordUserRoleMappings { get; set; }
+    DbSet<RolePermissionRecordMapping> PermissionRecordUserRoleMappings { get; set; }
 }

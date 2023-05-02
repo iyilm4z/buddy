@@ -5,7 +5,7 @@ namespace Buddy.Domain.Entities;
 [Serializable]
 public abstract class Entity
 {
-    public int Id { get; set; }
+    public int Id { get; protected set; }
 
     public override string ToString() => $"[{GetType().Name} {Id}]";
 }
